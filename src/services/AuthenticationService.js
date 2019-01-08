@@ -1,7 +1,7 @@
 import Api from './Api';
 
 export default {
-  register(credentials) {
-    return Api().post('register', credentials);
+  signUp(credentials) {
+    return Api().post('/signup', credentials);
   },
 };
