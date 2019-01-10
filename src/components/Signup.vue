@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h1>Sign up</h1>
-    <b-alert :show="signUpMessage == null ? false : true">
+    <page-title-bar title="Sign up" />
+    <div class="description">Register a new user for this app by submitting the form below.</div>
+    <b-alert :show="signUpMessage === null ? false : true">
       {{ signUpMessage }}
     </b-alert>
     <b-form @submit="signUp" @reset="reset" v-if="showForm">
@@ -27,26 +28,29 @@
       </b-form-group>
       <b-form-group id="passwordLabel"
                     label="Password:"
-                    label-for="password"
-                    description="Enter at least four characters.">
+                    label-for="password">
         <b-form-input id="password"
                       type="password"
                       v-model="user.password"
                       required
-                      placeholder="Enter password">
+                      placeholder="Enter password (>3 characters)">
         </b-form-input>
       </b-form-group>
-      <b-button type="submit">Sign up</b-button>
-      <b-button type="reset">Reset</b-button>
+      <b-button type="submit" class="btn-outlined">Sign up</b-button>
+      <b-button type="reset" class="btn-outlined">Reset</b-button>
     </b-form>
   </div>
 </template>
 
 <script>
+import PageTitleBar from './PageTitleBar.vue';
 import AuthenticationService from '../services/AuthenticationService';
 
 export default {
   name: 'Signup',
+  components: {
+    PageTitleBar,
+  },
   data() {
     return {
       user: {
@@ -85,5 +89,11 @@ export default {
 </script>
 
 <style scoped>
+.description {
+  margin: 0 0 20px 0;
+}
 
+form {
+  max-width: 400px;
+}
 </style>

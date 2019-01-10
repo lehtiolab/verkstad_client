@@ -4,19 +4,29 @@
       <b-navbar-brand class="logo-wrapper" to="/">
         <font-awesome-icon icon="oil-can"/>
       </b-navbar-brand>
+      <h5 class="title">Verkstad</h5>
       <h6 class="subtitle">Mass Spectrometer Maintenance</h6>
     </div>
     <div class="navbar-body">
-      <b-nav-item to="/signup">Sign up</b-nav-item>
+      <b-nav-item to="/" exact>Home</b-nav-item>
+      <b-nav-item disabled to="/">Tasks</b-nav-item>
+      <b-nav-item to="/users">Users</b-nav-item>
+      <b-nav-item disabled to="/">Machines</b-nav-item>
     </div>
     <div class="navbar-footer">
-      <b-nav-text>Lehtiö Lab 2019</b-nav-text>
+      <b-nav-text>Lehtiö Lab {{ year }}</b-nav-text>
     </div>
   </b-nav>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      year: new Date().getFullYear(),
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -25,6 +35,7 @@ export default {};
   align-items: flex-start;
   min-width: 250px;
   max-width: 250px;
+  font-family: "Work Sans", sans-serif;
   background: #9dd5f8;
   color: #fffcf9;
 }
@@ -48,15 +59,29 @@ export default {};
   border-radius: 50%;
 }
 
+.title {
+  margin-top: 10px;
+  font-size: 2rem;
+}
+
 .subtitle {
   margin-top: 10px;
   font-size: 1.2rem;
 }
 
 .navbar-body {
-  width: 90%;
-  margin: auto;
+  width: 100%;
   text-align: center;
+}
+
+.navbar-body a {
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+.navbar-body a.active {
+  font-size: 1.8rem;
+  background-color: #25899f;
 }
 
 .navbar-footer {

@@ -1,6 +1,7 @@
 <template>
   <div>
-    <page-title-bar title="Home" />
+    <page-title-bar title="Users" />
+    <b-button class="btn-outlined" to="/signup">Sign up</b-button>
   </div>
 </template>
 
@@ -8,7 +9,7 @@
 import PageTitleBar from './PageTitleBar.vue';
 
 export default {
-  name: 'Home',
+  name: 'Users',
   components: {
     PageTitleBar,
   },
