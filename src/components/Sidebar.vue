@@ -14,7 +14,11 @@
       <b-nav-item disabled to="/">Machines</b-nav-item>
     </div>
     <div class="navbar-user">
-      <b-nav-item to="/login" exact>Login</b-nav-item>
+      <b-nav-text class="user-name" v-if="$store.state.isUserLoggedIn">
+        {{ $store.state.user.name }}
+      </b-nav-text>
+      <b-nav-item to="/login" v-if="!$store.state.isUserLoggedIn">Login</b-nav-item>
+      <b-nav-item @click="logout" v-if="$store.state.isUserLoggedIn">Logout</b-nav-item>
     </div>
     <div class="navbar-footer">
       <b-nav-text>Lehtiö Lab {{ year }}</b-nav-text>
@@ -28,6 +32,15 @@ export default {
     return {
       year: new Date().getFullYear(),
     };
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('setToken', null);
+      this.$store.dispatch('setUser', null);
+      this.$router.push({
+        name: 'home',
+      });
+    },
   },
 };
 </script>
@@ -83,22 +96,25 @@ export default {
 }
 
 .navbar-body a.active {
-  font-size: 1.8rem;
   background-color: #25899f;
 }
 
 .navbar-user {
   width: 100%;
+  font-size: 1.2rem;
   text-align: center;
 }
 
+.navbar-user .user-name {
+  width: 100%;
+  background-color: #25899f;
+}
+
 .navbar-user a {
-  font-size: 1.8rem;
   color: #fff;
 }
 
 .navbar-user a.active {
-  font-size: 1.8rem;
   background-color: #25899f;
 }
 

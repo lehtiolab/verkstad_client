@@ -5,7 +5,7 @@
     <b-alert :show="signUpMessage === null ? false : true">
       {{ signUpMessage }}
     </b-alert>
-    <b-form @submit="signUp" @reset="reset" v-if="showForm">
+    <b-form @submit="signUp" @reset="reset" autocomplete="off" v-if="showForm">
       <b-form-group id="emailLabel"
                     label="eMail address:"
                     label-for="email">
