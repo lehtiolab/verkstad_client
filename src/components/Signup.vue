@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <div>
     <h1>Sign up</h1>
     <b-alert :show="signUpMessage == null ? false : true">
       {{ signUpMessage }}
@@ -39,7 +39,7 @@
       <b-button type="submit">Sign up</b-button>
       <b-button type="reset">Reset</b-button>
     </b-form>
-  </b-container>
+  </div>
 </template>
 
 <script>
