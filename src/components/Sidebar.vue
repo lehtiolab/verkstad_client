@@ -13,6 +13,9 @@
       <b-nav-item to="/users">Users</b-nav-item>
       <b-nav-item disabled to="/">Machines</b-nav-item>
     </div>
+    <div class="navbar-user">
+      <b-nav-item to="/login" exact>Login</b-nav-item>
+    </div>
     <div class="navbar-footer">
       <b-nav-text>Lehtiö Lab {{ year }}</b-nav-text>
     </div>
@@ -80,6 +83,21 @@ export default {
 }
 
 .navbar-body a.active {
+  font-size: 1.8rem;
+  background-color: #25899f;
+}
+
+.navbar-user {
+  width: 100%;
+  text-align: center;
+}
+
+.navbar-user a {
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+.navbar-user a.active {
   font-size: 1.8rem;
   background-color: #25899f;
 }
