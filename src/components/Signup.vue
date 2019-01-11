@@ -81,7 +81,7 @@ export default {
       this.user.email = '';
       this.user.name = '';
       this.user.password = '';
-      this.loginMessage = null;
+      this.signUpMessage = null;
       this.showForm = false;
       this.$nextTick(() => { this.showForm = true; });
     },

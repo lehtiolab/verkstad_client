@@ -1,9 +1,14 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './components/Home.vue';
+import Logbook from './components/Logbook.vue';
 import Users from './components/Users.vue';
 import Signup from './components/Signup.vue';
 import Login from './components/Login.vue';
+import Machines from './components/Machines.vue';
+import AddMachine from './components/AddMachine.vue';
+import Tasks from './components/Tasks.vue';
+import AddTask from './components/AddTask.vue';
 
 Vue.use(Router);
 
@@ -15,6 +20,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/logbook',
+      name: 'logbook',
+      component: Logbook,
     },
     {
       path: '/users',
@@ -30,6 +40,26 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login,
+    },
+    {
+      path: '/machines',
+      name: 'machines',
+      component: Machines,
+    },
+    {
+      path: '/addmachine',
+      name: 'addmachine',
+      component: AddMachine,
+    },
+    {
+      path: '/tasks',
+      name: 'tasks',
+      component: Tasks,
+    },
+    {
+      path: '/addtask',
+      name: 'addtask',
+      component: AddTask,
     },
     {
       path: '*',

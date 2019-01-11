@@ -2,9 +2,9 @@ import Api from './Api';
 
 export default {
   add(properties) {
-    return Api().post('/addtask', properties);
+    return Api().post('/addlog', properties);
   },
   index() {
-    return Api().get('/tasks');
+    return Api().get('/logbook');
   },
 };

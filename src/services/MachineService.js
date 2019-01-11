@@ -1,7 +1,10 @@
 import Api from './Api';
 
 export default {
-  addMachine(specifications) {
+  add(specifications) {
     return Api().post('/addmachine', specifications);
+  },
+  index() {
+    return Api().get('/machines');
   },
 };

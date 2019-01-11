@@ -1,43 +1,46 @@
 <template>
   <div>
-    <page-title-bar title="Users" />
-    <b-table class="user-table"
-             :items="users"
+    <page-title-bar title="Tasks" />
+    <b-table class="tasks-table"
+             :items="tasks"
              :fields="fields"
              responsive
-             v-if="users.length > 0">
+             v-if="tasks.length > 0">
     </b-table>
     <b-button class="btn-outlined"
-              to="/login"
-              v-if="!$store.state.isUserLoggedIn">
-      Login
-    </b-button>
-    <b-button class="btn-outlined"
-              to="/signup">
-      Add user
+              to="/addtask">
+      Add task
     </b-button>
   </div>
 </template>
 
 <script>
 import PageTitleBar from './PageTitleBar.vue';
-import AuthenticationService from '../services/AuthenticationService';
+import TaskService from '../services/TaskService';
 
 export default {
-  name: 'Users',
+  name: 'Tasks',
   components: {
     PageTitleBar,
   },
   data() {
     return {
-      users: [],
+      tasks: [],
       fields: {
         name: {
           label: 'Name',
           sortable: true,
         },
-        email: {
-          label: 'eMail',
+        description: {
+          label: 'Description',
+        },
+        interval: {
+          label: 'Interval',
+          sortable: true,
+          formatter: (value) => {
+            const suffix = value === 1 ? ' day' : ' days';
+            return value.toString() + suffix;
+          },
         },
         createdAt: {
           label: 'Created',
@@ -55,7 +58,7 @@ export default {
     };
   },
   async mounted() {
-    this.users = (await AuthenticationService.index()).data;
+    this.tasks = (await TaskService.index()).data;
   },
 };
 </script>

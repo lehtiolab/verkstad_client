@@ -1,43 +1,39 @@
 <template>
   <div>
-    <page-title-bar title="Users" />
-    <b-table class="user-table"
-             :items="users"
+    <page-title-bar title="Machines" />
+    <b-table class="machines-table"
+             :items="machines"
              :fields="fields"
              responsive
-             v-if="users.length > 0">
+             v-if="machines.length > 0">
     </b-table>
     <b-button class="btn-outlined"
-              to="/login"
-              v-if="!$store.state.isUserLoggedIn">
-      Login
-    </b-button>
-    <b-button class="btn-outlined"
-              to="/signup">
-      Add user
+              to="/addmachine">
+      Add machine
     </b-button>
   </div>
 </template>
 
 <script>
 import PageTitleBar from './PageTitleBar.vue';
-import AuthenticationService from '../services/AuthenticationService';
+import MachineService from '../services/MachineService';
 
 export default {
-  name: 'Users',
+  name: 'Machines',
   components: {
     PageTitleBar,
   },
   data() {
     return {
-      users: [],
+      machines: [],
       fields: {
         name: {
           label: 'Name',
           sortable: true,
         },
-        email: {
-          label: 'eMail',
+        type: {
+          label: 'Type',
+          sortable: true,
         },
         createdAt: {
           label: 'Created',
@@ -55,7 +51,7 @@ export default {
     };
   },
   async mounted() {
-    this.users = (await AuthenticationService.index()).data;
+    this.machines = (await MachineService.index()).data;
   },
 };
 </script>
