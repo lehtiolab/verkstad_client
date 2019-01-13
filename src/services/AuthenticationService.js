@@ -10,4 +10,7 @@ export default {
   index() {
     return Api().get('/users');
   },
+  deleteUser(userEmail) {
+    return Api().post('/deleteuser', userEmail);
+  },
 };
