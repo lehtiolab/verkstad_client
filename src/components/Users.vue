@@ -17,7 +17,7 @@
     </b-table>
     <b-button class="btn-outlined"
               to="/login"
-              v-if="!$store.state.isUserLoggedIn">
+              v-if="!$store.state.isUserLoggedIn && this.users.length > 0">
       Login
     </b-button>
     <b-button class="btn-outlined"
@@ -26,7 +26,7 @@
     </b-button>
 
     <b-modal id="modalQuestion" @ok="deleteUser" @hide="resetModal" title="Delete user?">
-      <p>Do you really want to delete this user?</p>
+      <p>Do you really want to kick out this user?</p>
       <p>{{ modalQuestion.userName }}<br />
          {{ modalQuestion.userEMail }}</p>
     </b-modal>
@@ -78,9 +78,12 @@ export default {
     };
   },
   async mounted() {
-    this.users = (await AuthenticationService.index()).data;
+    await this.loadUsers();
   },
   methods: {
+    async loadUsers() {
+      this.users = (await AuthenticationService.index()).data;
+    },
     deleteUserRequest(item) {
       this.modalQuestion.userName = item.name;
       this.modalQuestion.userEMail = item.email;
@@ -91,10 +94,14 @@ export default {
         await AuthenticationService.deleteUser({
           email: this.modalQuestion.userEMail,
         });
-        if (this.modalQuestion.userEMail === this.$store.state.user.email) this.logout();
+        if (this.$store.state.user
+            && this.modalQuestion.userEMail === this.$store.state.user.email) {
+          this.logout();
+        }
+        this.loadUsers();
         this.message = 'User deletion was successful.';
       } catch (err) {
-        this.message = 'An error occured while deleting a user.';
+        this.message = err.response.data.error;
       }
     },
     logout() {

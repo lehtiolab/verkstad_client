@@ -70,8 +70,9 @@ export default {
           name: this.user.name,
           password: this.user.password,
         });
-        this.signUpMessage = 'Successfully signed up!';
-        this.showForm = false;
+        this.$router.push({
+          path: '/users',
+        });
       } catch (error) {
         this.signUpMessage = error.response.data.error;
       }

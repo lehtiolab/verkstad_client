@@ -7,4 +7,7 @@ export default {
   index() {
     return Api().get('/machines');
   },
+  deleteMachine(name) {
+    return Api().post('/deletemachine', name);
+  },
 };

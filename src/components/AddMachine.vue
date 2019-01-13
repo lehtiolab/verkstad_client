@@ -56,10 +56,11 @@ export default {
           name: this.machine.name,
           type: this.machine.type,
         });
-        this.message = 'Successfully added the mass spec!';
-        this.showForm = false;
-      } catch (error) {
-        this.message = error.response.data.error;
+        this.$router.push({
+          path: '/machines',
+        });
+      } catch (err) {
+        this.message = err.response.data.error;
       }
     },
     reset(evt) {

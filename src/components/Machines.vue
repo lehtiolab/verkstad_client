@@ -6,11 +6,21 @@
              :fields="fields"
              responsive
              v-if="machines.length > 0">
+      <template slot="actions" slot-scope="row">
+        <b-button size="sm" @click.stop="deleteMachineRequest(row.item)">
+          Delete
+        </b-button>
+      </template>
     </b-table>
     <b-button class="btn-outlined"
               to="/addmachine">
       Add machine
     </b-button>
+
+    <b-modal id="modalQuestion" @ok="deleteMachine" @hide="resetModal" title="Delete machine?">
+      <p>Do you really want to delete this machine?</p>
+      <p>{{ modalQuestion.name }}</p>
+    </b-modal>
   </div>
 </template>
 
@@ -47,11 +57,42 @@ export default {
             ].join('-');
           },
         },
+        actions: {
+          label: '',
+          sortable: false,
+        },
+      },
+      modalQuestion: {
+        name: '',
       },
     };
   },
   async mounted() {
-    this.machines = (await MachineService.index()).data;
+    await this.loadMachines();
+  },
+  methods: {
+    async loadMachines() {
+      this.machines = (await MachineService.index()).data;
+    },
+    deleteMachineRequest(item) {
+      this.modalQuestion.name = item.name;
+      this.$root.$emit('bv::show::modal', 'modalQuestion');
+    },
+    async deleteMachine() {
+      try {
+        await MachineService.deleteMachine({
+          name: this.modalQuestion.name,
+        });
+        await this.loadMachines();
+        this.message = 'Machine deletion was successful.';
+      } catch (err) {
+        console.log(err);
+        this.message = err.response.data.error;
+      }
+    },
+    resetModal() {
+      this.modalQuestion.name = '';
+    },
   },
 };
 </script>
