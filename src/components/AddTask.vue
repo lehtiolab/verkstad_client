@@ -111,12 +111,14 @@ export default {
     async addTask() {
       try {
         await TaskService.add({
-          name: this.task.name,
-          description: this.task.description,
+          task: {
+            name: this.task.name,
+            description: this.task.description,
+            repare: this.task.repare,
+            startDate: this.task.startDate,
+            interval: this.task.interval,
+          },
           machineIds: this.task.machineIds,
-          repare: this.task.repare,
-          startDate: this.task.startDate,
-          interval: this.task.interval,
         });
         this.$router.push({
           path: '/tasks',

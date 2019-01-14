@@ -1,5 +1,5 @@
 <template>
-  <div class="task-wrapper">
+  <div class="task-wrapper" v-if="false">
     <page-title-bar title="Home" />
     <div class="description">Mass spec maintenance for pros. See all due tasks below.</div>
     <b-alert :show="message === null ? false : true">
@@ -51,8 +51,8 @@ export default {
   },
   async mounted() {
     try {
-      this.dueTasks = (await TaskService.dueTasks()).data.dueTasks;
-      // make a task for each machine that appears
+      this.dueTasks = (await TaskService.dueTasks()).data;
+      console.log(this.dueTasks);
     } catch (err) {
       this.message = err.response.data.error;
     }
@@ -127,7 +127,7 @@ li.task-card {
   align-items: left;
   width: 100%;
   height: 100%;
-  padding: 3px;
+  padding: 5px 10px;
   background-color: rgba(238, 238, 238, 0.336);
 }
 
