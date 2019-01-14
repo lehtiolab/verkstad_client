@@ -52,6 +52,7 @@ export default {
   min-width: 250px;
   max-width: 250px;
   font-family: "Work Sans", sans-serif;
+  font-weight: 200;
   background: #9dd5f8;
   color: #fffcf9;
 }

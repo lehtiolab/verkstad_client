@@ -46,7 +46,7 @@
                     label-for="start">
         <b-form-input id="start"
                       type="date"
-                      v-model="task.start">
+                      v-model="task.startDate">
         </b-form-input>
       </b-form-group>
       <b-form-group id="intervalLabel"
@@ -86,7 +86,7 @@ export default {
         description: '',
         machineIds: [],
         repare: '',
-        start: '',
+        startDate: '',
         interval: '',
       },
       machines: [],
@@ -115,7 +115,7 @@ export default {
           description: this.task.description,
           machineIds: this.task.machineIds,
           repare: this.task.repare,
-          start: this.task.start,
+          startDate: this.task.startDate,
           interval: this.task.interval,
         });
         this.$router.push({

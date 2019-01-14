@@ -2,7 +2,7 @@ import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faOilCan } from '@fortawesome/free-solid-svg-icons';
+import { faOilCan, faArrowAltCircleLeft, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import { sync } from 'vuex-router-sync';
@@ -20,6 +20,8 @@ Vue.use(BootstrapVue);
 sync(store, router);
 
 library.add(faOilCan);
+library.add(faArrowAltCircleLeft);
+library.add(faCheckCircle);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

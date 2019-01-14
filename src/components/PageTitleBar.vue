@@ -1,5 +1,8 @@
 <template>
   <div class="bar">
+    <b-button class="btn-back" :to="backto" v-if="backto">
+      <font-awesome-icon icon="arrow-alt-circle-left"/>
+    </b-button>
     <h1>{{ title }}</h1>
     <div class="date">{{ today }}</div>
   </div>
@@ -10,6 +13,7 @@ export default {
   name: 'PageTitleBar',
   props: [
     'title',
+    'backto',
   ],
   data() {
     return {
@@ -19,12 +23,7 @@ export default {
   },
   mounted() {
     const d = new Date();
-    const dFormatted = [
-      d.getFullYear(),
-      ((d.getMonth() + 1) < 10 ? '0' : '') + (d.getMonth() + 1),
-      (d.getDate() < 10 ? '0' : '') + d.getDate(),
-    ].join('-');
-    this.today = [this.days[d.getDay()], dFormatted].join(', ');
+    this.today = [this.days[d.getDay()], d.toISOString().split('T')[0]].join(', ');
   },
 };
 </script>
@@ -37,16 +36,24 @@ export default {
   justify-content: space-between;
   align-items: baseline;
   margin: 0 0 20px 0;
+  font-family: 'Work Sans', sans-serif;
   border-bottom: 3px solid #9dd5f8;
 }
 
 .bar h1 {
-  font-family: 'Work Sans', sans-serif;
+  font-weight: 200;
   font-size: 4rem;
 }
 
+a.btn-back {
+  font-size: 3rem;
+  color: #9dd5f8;
+  background-color: #fff;
+  border: none;
+}
+
 .date {
-  font-family: 'Work Sans', sans-serif;
   font-size: 2rem;
+  font-weight: 200;
 }
 </style>

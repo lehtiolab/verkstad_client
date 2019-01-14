@@ -7,7 +7,10 @@
              responsive
              v-if="tasks.length > 0">
       <template slot="actions" slot-scope="row">
-        <b-button size="sm" @click.stop="deleteTaskRequest(row.item)">
+        <b-button size="sm" class="mr-2 btn-details" @click.stop="showDetails(row.item)">
+          Details
+        </b-button>
+        <b-button size="sm" class="mr-2 btn-delete" @click.stop="deleteTaskRequest(row.item)">
           Delete
         </b-button>
       </template>
@@ -17,10 +20,9 @@
       Add task
     </b-button>
 
-    <b-modal id="modalQuestion" @ok="deleteTask" @hide="resetModal" title="Delete task?">
+    <b-modal id="modalQuestion" @ok="deleteTask" title="Delete task?">
       <p>Do you really want to delete this task?</p>
-      <p>ID: {{ modalQuestion.id }}<br />
-         Name: {{ modalQuestion.name }}</p>
+      <p>{{ modalQuestion.name }}</p>
     </b-modal>
   </div>
 </template>
@@ -38,10 +40,6 @@ export default {
     return {
       tasks: [],
       fields: {
-        id: {
-          label: 'ID',
-          sortable: true,
-        },
         name: {
           label: 'Name',
           sortable: true,
@@ -62,11 +60,7 @@ export default {
           sortable: true,
           formatter: (value) => {
             const d = new Date(value);
-            return [
-              d.getFullYear(),
-              ((d.getMonth() + 1) < 10 ? '0' : '') + (d.getMonth() + 1),
-              (d.getDate() < 10 ? '0' : '') + d.getDate(),
-            ].join('-');
+            return d.toISOString().split('T')[0];
           },
         },
         actions: {
@@ -86,7 +80,6 @@ export default {
   methods: {
     async loadTasks() {
       this.tasks = (await TaskService.index()).data;
-      console.log(this.tasks);
     },
     deleteTaskRequest(item) {
       this.modalQuestion.id = item.id;
@@ -104,9 +97,13 @@ export default {
         this.message = err.response.data.error;
       }
     },
-    resetModal() {
-      this.modalQuestion.name = null;
-      this.modalQuestion.name = '';
+    showDetails(item) {
+      this.$router.push({
+        name: 'taskdetails',
+        params: {
+          taskId: item.id,
+        },
+      });
     },
   },
 };

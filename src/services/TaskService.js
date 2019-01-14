@@ -10,4 +10,10 @@ export default {
   deleteTask(properties) {
     return Api().post('/deletetask', properties);
   },
+  task(taskId) {
+    return Api().get(`/task/${taskId}`);
+  },
+  dueTasks() {
+    return Api().get('/duetasks');
+  },
 };

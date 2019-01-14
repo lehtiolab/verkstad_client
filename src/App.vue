@@ -20,11 +20,21 @@ export default {
 
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:200');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:200,400');
 
 button.btn-outlined, a.btn-outlined {
   margin: 5px 10px 5px 0;
   background-color: #9dd5f8;
+  border: none;
+}
+
+button.btn-details {
+  background-color: #9dd5f8;
+  border: none;
+}
+
+button.btn-delete {
+  background-color: crimson;
   border: none;
 }
 

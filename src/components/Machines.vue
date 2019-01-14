@@ -7,7 +7,7 @@
              responsive
              v-if="machines.length > 0">
       <template slot="actions" slot-scope="row">
-        <b-button size="sm" @click.stop="deleteMachineRequest(row.item)">
+        <b-button size="sm" class="mr-2 btn-delete" @click.stop="deleteMachineRequest(row.item)">
           Delete
         </b-button>
       </template>
@@ -50,11 +50,7 @@ export default {
           sortable: true,
           formatter: (value) => {
             const d = new Date(value);
-            return [
-              d.getFullYear(),
-              ((d.getMonth() + 1) < 10 ? '0' : '') + (d.getMonth() + 1),
-              (d.getDate() < 10 ? '0' : '') + d.getDate(),
-            ].join('-');
+            return d.toISOString().split('T')[0];
           },
         },
         actions: {

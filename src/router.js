@@ -9,6 +9,7 @@ import Machines from './components/Machines.vue';
 import AddMachine from './components/AddMachine.vue';
 import Tasks from './components/Tasks.vue';
 import AddTask from './components/AddTask.vue';
+import TaskDetails from './components/TaskDetails.vue';
 
 Vue.use(Router);
 
@@ -60,6 +61,12 @@ export default new Router({
       path: '/addtask',
       name: 'addtask',
       component: AddTask,
+    },
+    {
+      path: '/taskdetails/:taskId',
+      name: 'taskdetails',
+      component: TaskDetails,
+      props: true,
     },
     {
       path: '*',
