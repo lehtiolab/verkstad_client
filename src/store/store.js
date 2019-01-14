@@ -7,21 +7,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   strict: true,
   state: {
-    token: localStorage.getItem('user-token') || null,
     user: JSON.parse(localStorage.getItem('user')) || null,
-    isUserLoggedIn: Boolean(localStorage.getItem('user-token')),
   },
   mutations: {
-    setToken(state, token) {
-      state.token = token;
-      if (token) {
-        state.isUserLoggedIn = true;
-        localStorage.setItem('user-token', token);
-      } else {
-        state.isUserLoggedIn = false;
-        localStorage.removeItem('user-token');
-      }
-    },
     setUser(state, user) {
       state.user = user;
       if (user) {
@@ -32,11 +20,11 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    setToken({ commit }, token) {
-      commit('setToken', token);
-    },
     setUser({ commit }, user) {
       commit('setUser', user);
+    },
+    logout({ commit }) {
+      commit('setUser', null);
     },
   },
 });

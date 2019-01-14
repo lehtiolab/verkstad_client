@@ -17,7 +17,7 @@
     </b-table>
     <b-button class="btn-outlined"
               to="/login"
-              v-if="!$store.state.isUserLoggedIn && this.users.length > 0">
+              v-if="!$store.state.user && this.users.length > 0">
       Login
     </b-button>
     <b-button class="btn-outlined"
@@ -25,7 +25,7 @@
       Add user
     </b-button>
 
-    <b-modal id="modalQuestion" @ok="deleteUser" @hide="resetModal" title="Delete user?">
+    <b-modal id="modalQuestion" @ok="deleteUser" title="Delete user?">
       <p>Do you really want to kick out this user?</p>
       <p>{{ modalQuestion.userName }}<br />
          {{ modalQuestion.userEMail }}</p>
@@ -95,22 +95,16 @@ export default {
           email: this.modalQuestion.userEMail,
         });
         if (this.$store.state.user
-            && this.modalQuestion.userEMail === this.$store.state.user.email) {
+            && (this.modalQuestion.userEMail === this.$store.state.user.email)) {
           this.logout();
         }
         this.loadUsers();
-        this.message = 'User deletion was successful.';
       } catch (err) {
         this.message = err.response.data.error;
       }
     },
     logout() {
-      this.$store.dispatch('setToken', null);
-      this.$store.dispatch('setUser', null);
-    },
-    resetModal() {
-      this.modalQuestion.userName = '';
-      this.modalQuestion.userEMail = '';
+      this.$store.dispatch('logout');
     },
   },
 };

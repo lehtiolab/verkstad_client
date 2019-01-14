@@ -58,7 +58,6 @@ export default {
           email: this.user.email,
           password: this.user.password,
         });
-        this.$store.dispatch('setToken', response.data.token);
         this.$store.dispatch('setUser', response.data.user);
         this.loginMessage = 'Successfully logged in!';
         this.showForm = false;
