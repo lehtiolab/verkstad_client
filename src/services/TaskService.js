@@ -7,4 +7,7 @@ export default {
   index() {
     return Api().get('/tasks');
   },
+  deleteTask(properties) {
+    return Api().post('/deletetask', properties);
+  },
 };

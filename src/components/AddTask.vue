@@ -25,11 +25,12 @@
         </b-form-input>
       </b-form-group>
       <b-form-group id="machineLabel"
-                    label="Machine:"
-                    label-for="machine">
-        <b-form-select id="machine"
-                       v-model="task.machineId"
-                       :options="machines">
+                    label="Select machines:"
+                    label-for="machines">
+        <b-form-select id="machines"
+                       v-model="task.machineIds"
+                       :options="machines"
+                       multiple>
         </b-form-select>
       </b-form-group>
       <b-form-group id="repareLabel"
@@ -83,7 +84,7 @@ export default {
       task: {
         name: '',
         description: '',
-        machineId: null,
+        machineIds: [],
         repare: '',
         start: '',
         interval: '',
@@ -105,11 +106,6 @@ export default {
       value: element.id,
       text: element.name,
     }));
-    this.machines.push({
-      value: null,
-      text: 'Please select a mass spec.',
-      disabled: true,
-    });
   },
   methods: {
     async addTask() {
@@ -117,15 +113,16 @@ export default {
         await TaskService.add({
           name: this.task.name,
           description: this.task.description,
-          machineId: this.task.machineId,
+          machineIds: this.task.machineIds,
           repare: this.task.repare,
           start: this.task.start,
           interval: this.task.interval,
         });
-        this.message = 'Successfully added the task!';
-        this.showForm = false;
-      } catch (error) {
-        this.message = error.response.data.error;
+        this.$router.push({
+          path: '/tasks',
+        });
+      } catch (err) {
+        this.message = err.response.data.error;
       }
     },
     reset(evt) {
