@@ -88,10 +88,7 @@ export default {
     },
     async deleteTask() {
       try {
-        await TaskService.deleteTask({
-          id: this.modalQuestion.id,
-          name: this.modalQuestion.name,
-        });
+        await TaskService.deleteTask(this.modalQuestion.id);
         await this.loadTasks();
       } catch (err) {
         this.message = err.response.data.error;

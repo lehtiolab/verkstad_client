@@ -68,6 +68,7 @@ export default {
         },
       },
       modalQuestion: {
+        userId: null,
         userName: '',
         userEMail: '',
       },
@@ -81,15 +82,14 @@ export default {
       this.users = (await AuthenticationService.index()).data;
     },
     deleteUserRequest(item) {
+      this.modalQuestion.userId = item.id;
       this.modalQuestion.userName = item.name;
       this.modalQuestion.userEMail = item.email;
       this.$root.$emit('bv::show::modal', 'modalQuestion');
     },
     async deleteUser() {
       try {
-        await AuthenticationService.deleteUser({
-          email: this.modalQuestion.userEMail,
-        });
+        await AuthenticationService.deleteUser(this.modalQuestion.userId);
         if (this.$store.state.user
             && (this.modalQuestion.userEMail === this.$store.state.user.email)) {
           this.logout();

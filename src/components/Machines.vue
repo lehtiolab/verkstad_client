@@ -59,6 +59,7 @@ export default {
         },
       },
       modalQuestion: {
+        id: null,
         name: '',
       },
     };
@@ -71,16 +72,17 @@ export default {
       this.machines = (await MachineService.index()).data;
     },
     deleteMachineRequest(item) {
-      this.modalQuestion.name = item.name;
+      this.modalQuestion = {
+        id: item.id,
+        name: item.name,
+      };
       this.$root.$emit('bv::show::modal', 'modalQuestion');
     },
     async deleteMachine() {
       try {
-        await MachineService.deleteMachine({
-          name: this.modalQuestion.name,
-        });
+        const response = await MachineService.deleteMachine(this.modalQuestion.id);
         await this.loadMachines();
-        this.message = 'Machine deletion was successful.';
+        this.message = response.message;
       } catch (err) {
         console.log(err);
         this.message = err.response.data.error;
