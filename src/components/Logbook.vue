@@ -27,23 +27,38 @@ export default {
           label: 'Name',
           sortable: true,
         },
+        machine: {
+          label: 'Machine',
+          sortable: true,
+        },
+        user: {
+          label: 'User',
+          sortable: true,
+        },
         createdAt: {
-          label: 'Done',
+          label: 'Last done',
           sortable: true,
           formatter: (value) => {
             const d = new Date(value);
-            return [
-              d.getFullYear(),
-              ((d.getMonth() + 1) < 10 ? '0' : '') + (d.getMonth() + 1),
-              (d.getDate() < 10 ? '0' : '') + d.getDate(),
-            ].join('-');
+            return d.toISOString().split('T')[0];
           },
+        },
+        mode: {
+          label: 'OK',
+          sortable: true,
         },
       },
     };
   },
   async mounted() {
-    this.logs = (await LogService.index()).data;
+    const rawLogs = (await LogService.index()).data;
+    this.logs = rawLogs.map(e => ({
+      name: e.MachineTask.Task.name,
+      createdAt: e.createdAt,
+      machine: e.MachineTask.Machine.name,
+      mode: e.mode,
+      // user: e.User.name,
+    }));
   },
 };
 </script>

@@ -14,19 +14,19 @@
            : Math.ceil(Math.abs(data.dayDiff)) + ' days ' }} left)
       </div>
     </div>
-    <b-button class="dismiss-task"
-              :class="[(data.dayDiff > -1)
-              ? 'bar-red' : (data.dayDiff > -7)
-              ? 'bar-yellow' : 'bar-blue']"
-              @click.stop="dismissTask">
-      <font-awesome-icon icon="times-circle"/>
-    </b-button>
     <b-button class="check-task"
               :class="[(data.dayDiff > -1)
               ? 'bar-red' : (data.dayDiff > -7)
               ? 'bar-yellow' : 'bar-blue']"
               @click.stop="checkTask">
       <font-awesome-icon icon="check-circle"/>
+    </b-button>
+    <b-button class="dismiss-task"
+              :class="[(data.dayDiff > -1)
+              ? 'bar-red' : (data.dayDiff > -7)
+              ? 'bar-yellow' : 'bar-blue']"
+              @click.stop="dismissTask">
+      <font-awesome-icon icon="times-circle"/>
     </b-button>
   </li>
 </template>
@@ -103,25 +103,22 @@ li.task-card {
   font-weight: 400;
 }
 
-button.dismiss-task {
+button {
   width: 60px;
   height: 100%;
   margin: 0;
   padding: 0;
   font-size: 2.2rem;
   border: none;
-  border-radius: 0;
+}
+
+button.dismiss-task {
+  border-radius: 0 7px 7px 0;
   background-color: lightcoral;
 }
 
 button.check-task {
-  width: 60px;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-size: 2.2rem;
-  border-radius: 0 7px 7px 0;
-  border: none;
+  border-radius: 0;
   background-color: darkseagreen;
 }
 </style>

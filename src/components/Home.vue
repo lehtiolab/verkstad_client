@@ -36,7 +36,7 @@
 import _ from 'lodash';
 import PageTitleBar from './PageTitleBar.vue';
 import MachineTaskCard from './MachineTaskCard.vue';
-import TaskService from '../services/TaskService';
+import MachineTaskService from '../services/MachineTaskService';
 
 export default {
   name: 'Home',
@@ -55,7 +55,7 @@ export default {
   },
   async mounted() {
     try {
-      const dueMachineTasks = (await TaskService.dueMachineTasks()).data.machineTasks;
+      const dueMachineTasks = (await MachineTaskService.index()).data.machineTasks;
       this.dueMachineTasks.today = dueMachineTasks.filter(
         machineTask => machineTask.dayDiff >= -1,
       );

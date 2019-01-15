@@ -13,7 +13,4 @@ export default {
   task(taskId) {
     return Api().get(`/task/${taskId}`);
   },
-  dueMachineTasks() {
-    return Api().get('/duemachinetasks');
-  },
 };
