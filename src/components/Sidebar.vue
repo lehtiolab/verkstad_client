@@ -11,8 +11,8 @@
       <b-nav-item to="/" exact>Home</b-nav-item>
       <b-nav-item to="/logbook">Logbook</b-nav-item>
       <b-nav-item to="/tasks">Tasks</b-nav-item>
-      <b-nav-item to="/users">Users</b-nav-item>
       <b-nav-item to="/machines">Machines</b-nav-item>
+      <b-nav-item to="/users">Users</b-nav-item>
     </div>
     <div class="navbar-user">
       <b-nav-text class="user-name" v-if="$store.state.user">

@@ -35,7 +35,8 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
-  margin: 0 0 20px 0;
+  margin: 0;
+  padding: 20px 0 20px 0;
   font-family: 'Work Sans', sans-serif;
   border-bottom: 3px solid #9dd5f8;
 }

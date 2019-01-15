@@ -10,6 +10,7 @@ import AddMachine from './components/AddMachine.vue';
 import Tasks from './components/Tasks.vue';
 import AddTask from './components/AddTask.vue';
 import TaskDetails from './components/TaskDetails.vue';
+import WorkOnMachineTask from './components/WorkOnMachineTask.vue';
 
 Vue.use(Router);
 
@@ -66,6 +67,12 @@ export default new Router({
       path: '/taskdetails/:taskId',
       name: 'taskdetails',
       component: TaskDetails,
+      props: true,
+    },
+    {
+      path: '/workonmachinetask/:mode/:machineTaskId',
+      name: 'workonmachinetask',
+      component: WorkOnMachineTask,
       props: true,
     },
     {

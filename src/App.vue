@@ -22,6 +22,10 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:200,400');
 
+html, body {
+  height: 100%;
+}
+
 button.btn-outlined, a.btn-outlined {
   margin: 5px 10px 5px 0;
   background-color: #9dd5f8;
@@ -40,16 +44,12 @@ button.btn-delete {
 
 .alert-info {
   color: #000;
-  background-color: #9dd5f8 !important;
+  background-color: #9dd5f8;
 }
 
 #app {
   display: flex;
   width: 100%;
   height: 100vh;
-}
-
-.wrapper {
-  padding: 20px;
 }
 </style>

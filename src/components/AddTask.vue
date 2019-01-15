@@ -115,7 +115,7 @@ export default {
             name: this.task.name,
             description: this.task.description,
             repare: this.task.repare,
-            startDate: this.task.startDate,
+            startDate: new Date(this.task.startDate).setHours(23, 59, 0, 0),
             interval: this.task.interval,
           },
           machineIds: this.task.machineIds,
