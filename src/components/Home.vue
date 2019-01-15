@@ -1,5 +1,5 @@
 <template>
-  <div class="task-wrapper" v-if="false">
+  <div class="task-wrapper">
     <page-title-bar title="Home" />
     <div class="description">Mass spec maintenance for pros. See all due tasks below.</div>
     <b-alert :show="message === null ? false : true">
@@ -8,20 +8,28 @@
     <div class="task-board">
       <div class="task-box">
         <ol class="daily">
-          <li v-for="dueTask in orderedDueTasks"
-              :key="dueTask.id"
-              class="task-card">
+          <li v-for="dueMachineTask in orderedDueMachineTasks"
+              :key="dueMachineTask.id"
+              class="task-card"
+              @click="showTaskDetails(dueMachineTask)">
             <div class="task-color-bar"
-                 :class="[(dueTask.dayDiff > -1) ? 'bar-red' : (dueTask.dayDiff > -7)
+                 :class="[(dueMachineTask.dayDiff > -1) ? 'bar-red' : (dueMachineTask.dayDiff > -7)
                  ? 'bar-yellow' : 'bar-blue']">
             </div>
             <div class="task-body">
-              <h1>{{ dueTask.task.name }}</h1>
-              <div class="task-machines">{{ formatMachines(dueTask.task.machines) }}</div>
-              <div class="task-latest">Latest: {{ dueTask.nextDate.split('T')[0] }}</div>
+              <h1>{{ dueMachineTask.machineTask.Task.name }}</h1>
+              <div class="task-machine">{{ dueMachineTask.machineTask.Machine.name }}</div>
+              <div class="task-latest">Latest: {{ dueMachineTask.nextDate.split('T')[0] }}</div>
             </div>
+            <b-button class="dismiss-task"
+                      :class="[(dueMachineTask.dayDiff > -1)
+                      ? 'bar-red' : (dueMachineTask.dayDiff > -7)
+                      ? 'bar-yellow' : 'bar-blue']">
+              <font-awesome-icon icon="times-circle"/>
+            </b-button>
             <b-button class="check-task"
-                      :class="[(dueTask.dayDiff > -1) ? 'bar-red' : (dueTask.dayDiff > -7)
+                      :class="[(dueMachineTask.dayDiff > -1)
+                      ? 'bar-red' : (dueMachineTask.dayDiff > -7)
                       ? 'bar-yellow' : 'bar-blue']">
               <font-awesome-icon icon="check-circle"/>
             </b-button>
@@ -46,26 +54,29 @@ export default {
   data() {
     return {
       message: null,
-      dueTasks: null,
+      dueMachineTasks: null,
     };
   },
   async mounted() {
     try {
-      this.dueTasks = (await TaskService.dueTasks()).data;
-      console.log(this.dueTasks);
+      this.dueMachineTasks = (await TaskService.dueMachineTasks()).data.machineTasks;
     } catch (err) {
       this.message = err.response.data.error;
     }
   },
   computed: {
-    orderedDueTasks() {
-      return _.orderBy(this.dueTasks, 'dayDiff', 'desc');
+    orderedDueMachineTasks() {
+      return _.orderBy(this.dueMachineTasks, 'dayDiff', 'desc');
     },
   },
   methods: {
-    formatMachines(machines) {
-      const machineNames = machines.map(element => element.name);
-      return machineNames.join(', ');
+    showTaskDetails(item) {
+      this.$router.push({
+        name: 'taskdetails',
+        params: {
+          taskId: item.machineTask.Task.id,
+        },
+      });
     },
   },
 };
@@ -104,7 +115,7 @@ li.task-card {
 }
 
 .task-color-bar {
-  width: 6%;
+  width: 35px;
   height: 100%;
   border-radius: 7px 0 0 7px;
 }
@@ -114,7 +125,7 @@ li.task-card {
 }
 
 .bar-yellow {
-  background-color: goldenrod;
+  background-color: darkkhaki;
 }
 
 .bar-blue {
@@ -128,7 +139,7 @@ li.task-card {
   width: 100%;
   height: 100%;
   padding: 5px 10px;
-  background-color: rgba(238, 238, 238, 0.336);
+  background-color: rgb(233, 233, 233);
 }
 
 .task-body h1 {
@@ -138,13 +149,25 @@ li.task-card {
   font-weight: 400;
 }
 
+button.dismiss-task {
+  width: 60px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 2.2rem;
+  border: none;
+  border-radius: 0;
+  background-color: lightcoral;
+}
+
 button.check-task {
-  width: 12%;
+  width: 60px;
   height: 100%;
   margin: 0;
   padding: 0;
   font-size: 2.2rem;
   border-radius: 0 7px 7px 0;
   border: none;
+  background-color: darkseagreen;
 }
 </style>

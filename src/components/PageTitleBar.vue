@@ -1,6 +1,6 @@
 <template>
   <div class="bar">
-    <b-button class="btn-back" :to="backto" v-if="backto">
+    <b-button class="btn-back" :to="{ path: $store.state.route.from.fullPath }" v-if="showBack">
       <font-awesome-icon icon="arrow-alt-circle-left"/>
     </b-button>
     <h1>{{ title }}</h1>
@@ -13,7 +13,7 @@ export default {
   name: 'PageTitleBar',
   props: [
     'title',
-    'backto',
+    'showBack',
   ],
   data() {
     return {
@@ -45,7 +45,7 @@ export default {
   font-size: 4rem;
 }
 
-a.btn-back {
+a.btn-back, a.btn-back.btn-secondary.active {
   font-size: 3rem;
   color: #9dd5f8;
   background-color: #fff;

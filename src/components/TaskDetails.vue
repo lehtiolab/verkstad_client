@@ -1,7 +1,7 @@
 <template>
   <div class="task-details">
-    <page-title-bar :title="task.name" backto="/tasks" v-if="task" />
-    <page-title-bar title="Error" backto="/tasks" v-if="!task" />
+    <page-title-bar :title="task.name" showBack="true" v-if="task" />
+    <page-title-bar title="Error" showBack="true" v-if="!task" />
     <table class="task-details-table" v-if="task">
       <tr>
         <td class="row-title">Description</td>
@@ -31,7 +31,7 @@
       </tr>
       <tr>
         <td class="row-title">Created</td>
-        <td>{{ task.createdAt }}</td>
+        <td>{{ task.createdAt.split('T')[0] }}</td>
       </tr>
       <tr>
         <td class="row-title">Created by</td>

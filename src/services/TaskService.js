@@ -13,7 +13,7 @@ export default {
   task(taskId) {
     return Api().get(`/task/${taskId}`);
   },
-  dueTasks() {
-    return Api().get('/duetasks');
+  dueMachineTasks() {
+    return Api().get('/duemachinetasks');
   },
 };
