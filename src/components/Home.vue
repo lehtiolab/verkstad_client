@@ -5,15 +5,14 @@
     <b-alert :show="message === null ? false : true">
       {{ message }}
     </b-alert>
-    <div class="task-board">
+    <div class="task-board" v-if="machineTasksAvailable">
       <div class="task-box">
         <h5>Latest today</h5>
         <ol class="latest-today">
           <machine-task-card v-for="dueMachineTask in orderedDueMachineTasks.today"
                              :key="dueMachineTask.id"
                              class="task-card"
-                             :data="dueMachineTask"
-                             @click="showTaskDetails(dueMachineTask)">
+                             :data="dueMachineTask">
           </machine-task-card>
         </ol>
       </div>
@@ -23,8 +22,7 @@
           <machine-task-card v-for="dueMachineTask in orderedDueMachineTasks.upcoming"
                              :key="dueMachineTask.id"
                              class="task-card"
-                             :data="dueMachineTask"
-                             @click="showTaskDetails(dueMachineTask)">
+                             :data="dueMachineTask">
           </machine-task-card>
         </ol>
       </div>
@@ -47,6 +45,7 @@ export default {
   data() {
     return {
       message: null,
+      machineTasksAvailable: false,
       dueMachineTasks: {
         today: null,
         upcoming: null,
@@ -56,12 +55,19 @@ export default {
   async mounted() {
     try {
       const dueMachineTasks = (await MachineTaskService.index()).data.machineTasks;
-      this.dueMachineTasks.today = dueMachineTasks.filter(
-        machineTask => machineTask.dayDiff >= -1,
-      );
-      this.dueMachineTasks.upcoming = dueMachineTasks.filter(
-        machineTask => machineTask.dayDiff < -1,
-      );
+      if (dueMachineTasks.length === 0) {
+        this.machineTasksAvailable = false;
+        this.message = 'There are no upcoming tasks. '
+                       + 'Please define new tasks.';
+      } else {
+        this.dueMachineTasks.today = dueMachineTasks.filter(
+          machineTask => machineTask.dayDiff >= -1,
+        );
+        this.dueMachineTasks.upcoming = dueMachineTasks.filter(
+          machineTask => machineTask.dayDiff < -1,
+        );
+        this.machineTasksAvailable = true;
+      }
     } catch (err) {
       this.message = err.response.data.error;
     }
@@ -74,17 +80,6 @@ export default {
       };
     },
   },
-  methods: {
-    showTaskDetails(item) {
-      this.$router.push({
-        name: 'taskdetails',
-        params: {
-          taskId: item.machineTask.Task.id,
-        },
-      });
-    },
-    checkTask() {},
-  },
 };
 </script>
 
@@ -93,10 +88,6 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100vh;
-}
-
-.description {
-  margin: 0 0 20px 0;
 }
 
 .task-board {

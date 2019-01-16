@@ -1,6 +1,7 @@
 <template>
   <div>
     <page-title-bar title="Users" />
+    <div class="description"></div>
     <b-alert :show="message === null ? false : true">
       {{ message }}
     </b-alert>
@@ -27,8 +28,13 @@
 
     <b-modal id="modalQuestion" @ok="deleteUser" title="Delete user?">
       <p>Do you really want to kick out this user?</p>
-      <p>{{ modalQuestion.userName }}<br />
-         {{ modalQuestion.userEMail }}</p>
+      <p><strong>{{ modalQuestion.userName }}<br />
+         {{ modalQuestion.userEMail }}</strong></p>
+      <p v-if="$store.state.user"
+         v-show="$store.state.user.email === modalQuestion.userEMail">
+        Warning: You are going to delete yourself. If you continue,
+        you will be logged out automatically.
+      </p>
     </b-modal>
   </div>
 </template>
@@ -79,7 +85,14 @@ export default {
   },
   methods: {
     async loadUsers() {
-      this.users = (await AuthenticationService.index()).data;
+      try {
+        this.users = (await AuthenticationService.index()).data;
+        if (this.users.length === 0) {
+          this.message = 'There are no users registered.';
+        }
+      } catch (err) {
+        this.message = err.response.data.error;
+      }
     },
     deleteUserRequest(item) {
       this.modalQuestion.userId = item.id;
@@ -106,6 +119,5 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
 </style>

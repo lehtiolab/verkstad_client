@@ -8,23 +8,30 @@ export default new Vuex.Store({
   strict: true,
   state: {
     user: JSON.parse(localStorage.getItem('user')) || null,
+    token: localStorage.getItem('token') || null,
   },
   mutations: {
-    setUser(state, user) {
-      state.user = user;
-      if (user) {
-        localStorage.setItem('user', JSON.stringify(user));
+    setUser(state, data) {
+      state.user = data.user;
+      state.token = data.token;
+      if (state.token) {
+        localStorage.setItem('token', state.token);
+        localStorage.setItem('user', JSON.stringify(state.user));
       } else {
+        localStorage.removeItem('token');
         localStorage.removeItem('user');
       }
     },
   },
   actions: {
-    setUser({ commit }, user) {
-      commit('setUser', user);
+    setUser({ commit }, data) {
+      commit('setUser', data);
     },
     logout({ commit }) {
-      commit('setUser', null);
+      commit('setUser', {
+        user: null,
+        token: null,
+      });
     },
   },
 });

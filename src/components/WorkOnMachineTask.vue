@@ -1,19 +1,25 @@
 <template>
   <div v-if="machineTask">
     <page-title-bar :title="machineTask.Task.name" :showBack="true" />
-    <div class="description" v-if="mode === 'check'">
+    <div class="description green-desc" v-if="mode === 'check'">
+      <font-awesome-icon icon="check-circle" />
       The task has been successfully accomplished. Congrats!<br />
     </div>
-    <div class="description" v-if="mode === 'dismiss'">
-      There have been issues and the task cannot be checked.
+    <div class="description red-desc" v-if="mode === 'dismiss'">
+      <font-awesome-icon icon="times-circle" />
+      There have been issues!
     </div>
     <b-alert :show="message === null ? false : true">
       {{ message }}
     </b-alert>
     <table>
       <tr>
-        <td>Task description:</td>
+        <td>What to do:</td>
         <td>{{ machineTask.Task.description }}</td>
+      </tr>
+      <tr>
+        <td>If not OK:</td>
+        <td>{{ machineTask.Task.repare }}</td>
       </tr>
       <tr>
         <td>Machine:</td>
@@ -25,10 +31,11 @@
                     label="Comment:"
                     label-for="comment">
         <b-form-textarea id="comment"
-                     v-model="comment"
-                     placeholder="Enter some notes"
-                     rows="3"
-                     :no-resize="true">
+                         :class="[(mode === 'check') ? 'green-textarea' : 'red-textarea']"
+                         v-model.trim="comment"
+                         placeholder="Enter some notes"
+                         rows="3"
+                         :no-resize="true">
         </b-form-textarea>
       </b-form-group>
       <b-button type="submit" class="btn-outlined">Save</b-button>
@@ -86,18 +93,33 @@ export default {
 </script>
 
 <style scoped>
-.description {
-  margin: 0 0 20px 0;
-  font-size: 1.2rem;
-}
-
 table {
-  width: 20%;
+  width: 50%;
   margin: 0 0 20px 0;
   line-height: 2rem;
 }
 
 form {
   max-width: 500px;
+}
+
+.description {
+  font-size: 1.3rem;
+}
+
+.green-desc {
+  color: darkgreen
+}
+
+.red-desc {
+  color: crimson;
+}
+
+.green-textarea {
+  border-color: darkgreen
+}
+
+.red-textarea {
+  border-color: crimson;
 }
 </style>

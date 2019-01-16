@@ -2,6 +2,10 @@
   <div class="task-details">
     <page-title-bar :title="task.name" showBack="true" v-if="task" />
     <page-title-bar title="Error" showBack="true" v-if="!task" />
+    <div class="description"></div>
+    <b-alert :show="message === null ? false : true">
+      {{ message }}
+    </b-alert>
     <table class="task-details-table" v-if="task">
       <tr>
         <td class="row-title">Description</td>
@@ -20,14 +24,8 @@
         <td>{{ task.interval + ((task.interval === 1) ? ' day' : ' days')}}</td>
       </tr>
       <tr>
-        <td class="row-title">Machines</td>
-        <td>
-          <ul class="machine-list">
-            <li v-for="machine in task.machines" :key="machine.id">
-              {{ machine.name }}
-            </li>
-          </ul>
-        </td>
+        <td class="row-title">{{ (machineNames.length === 1) ? 'Machine' : 'Machines' }}</td>
+        <td>{{ machineNames.join(', ') }}</td>
       </tr>
       <tr>
         <td class="row-title">Created</td>
@@ -35,7 +33,7 @@
       </tr>
       <tr>
         <td class="row-title">Created by</td>
-        <td>tba</td>
+        <td>{{ task.User.name }}</td>
       </tr>
     </table>
   </div>
@@ -53,11 +51,21 @@ export default {
   props: ['taskId'],
   data() {
     return {
+      message: null,
       task: null,
+      machineNames: [],
     };
   },
   async mounted() {
-    this.task = (await TaskService.task(this.taskId)).data;
+    try {
+      this.task = (await TaskService.task(this.taskId)).data;
+      const names = this.task.MachineTasks.map(
+        machineTask => machineTask.Machine.name,
+      );
+      this.machineNames = names.filter((value, index, self) => self.indexOf(value) === index);
+    } catch (err) {
+      this.message = err.response.data.error;
+    }
   },
 };
 </script>
@@ -72,11 +80,5 @@ table {
   width: 17%;
   font-weight: bold;
   vertical-align: top;
-}
-
-ul.machine-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 </style>

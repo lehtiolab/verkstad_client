@@ -24,6 +24,15 @@
                       placeholder="Enter type">
         </b-form-input>
       </b-form-group>
+      <b-form-group id="kanteleIdLabel"
+                    label="Kantele ID:"
+                    label-for="kanteleId"
+                    description="Pleas ask your local admin.">
+        <b-form-input id="kanteleId"
+                      v-model="machine.kanteleId"
+                      placeholder="Enter Kantele ID">
+        </b-form-input>
+      </b-form-group>
       <b-button type="submit" class="btn-outlined">Add machine</b-button>
       <b-button type="reset" class="btn-outlined">Reset</b-button>
     </b-form>
@@ -44,6 +53,7 @@ export default {
       machine: {
         name: '',
         type: '',
+        kanteleId: null,
       },
       showForm: true,
       message: null,
@@ -55,6 +65,7 @@ export default {
         await MachineService.add({
           name: this.machine.name,
           type: this.machine.type,
+          kanteleId: this.machine.kanteleId,
         });
         this.$router.push({
           path: '/machines',
@@ -76,10 +87,6 @@ export default {
 </script>
 
 <style scoped>
-.description {
-  margin: 0 0 20px 0;
-}
-
 form {
   max-width: 400px;
 }

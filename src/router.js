@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './components/Home.vue';
 import Logbook from './components/Logbook.vue';
+import LogDetails from './components/LogDetails.vue';
 import Users from './components/Users.vue';
 import Signup from './components/Signup.vue';
 import Login from './components/Login.vue';
@@ -11,6 +12,7 @@ import Tasks from './components/Tasks.vue';
 import AddTask from './components/AddTask.vue';
 import TaskDetails from './components/TaskDetails.vue';
 import WorkOnMachineTask from './components/WorkOnMachineTask.vue';
+import MachineQC from './components/MachineQC.vue';
 
 Vue.use(Router);
 
@@ -27,6 +29,12 @@ export default new Router({
       path: '/logbook',
       name: 'logbook',
       component: Logbook,
+    },
+    {
+      path: '/logdetails/:logId',
+      name: 'logdetails',
+      component: LogDetails,
+      props: true,
     },
     {
       path: '/users',
@@ -73,6 +81,12 @@ export default new Router({
       path: '/workonmachinetask/:mode/:machineTaskId',
       name: 'workonmachinetask',
       component: WorkOnMachineTask,
+      props: true,
+    },
+    {
+      path: '/machineqc/:machineId',
+      name: 'machineqc',
+      component: MachineQC,
       props: true,
     },
     {

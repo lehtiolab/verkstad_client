@@ -91,10 +91,6 @@ export default {
 </script>
 
 <style scoped>
-.description {
-  margin: 0 0 20px 0;
-}
-
 form {
   max-width: 400px;
 }

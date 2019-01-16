@@ -7,4 +7,10 @@ export default {
   index() {
     return Api().get('/logbook');
   },
+  log(logId) {
+    return Api().get(`/log/${logId}`);
+  },
+  deleteLog(logId) {
+    return Api().delete(`/deletelog/${logId}`);
+  },
 };

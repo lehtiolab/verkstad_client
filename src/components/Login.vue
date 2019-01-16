@@ -58,9 +58,12 @@ export default {
           email: this.user.email,
           password: this.user.password,
         });
-        this.$store.dispatch('setUser', response.data.user);
+        this.$store.dispatch('setUser', response.data);
         this.loginMessage = 'Successfully logged in!';
         this.showForm = false;
+        this.$router.push({
+          path: this.$store.state.route.from.fullPath,
+        });
       } catch (error) {
         this.loginMessage = error.response.data.error;
       }
@@ -79,10 +82,6 @@ export default {
 </script>
 
 <style scoped>
-.description {
-  margin: 0 0 20px 0;
-}
-
 form {
   max-width: 400px;
 }

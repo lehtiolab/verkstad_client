@@ -1,28 +1,38 @@
 <template>
   <div>
     <page-title-bar title="Tasks" />
+    <div class="description"></div>
+    <b-alert :show="message === null ? false : true">
+      {{ message }}
+    </b-alert>
     <b-table class="tasks-table"
              :items="tasks"
              :fields="fields"
              responsive
              v-if="tasks.length > 0">
       <template slot="actions" slot-scope="row">
-        <b-button size="sm" class="mr-2 btn-details" @click.stop="showDetails(row.item)">
+        <b-button size="sm"
+                  class="mr-2 btn-details"
+                  @click.stop="showDetails(row.item)">
           Details
         </b-button>
-        <b-button size="sm" class="mr-2 btn-delete" @click.stop="deleteTaskRequest(row.item)">
+        <b-button size="sm"
+                  class="mr-2 btn-delete"
+                  @click.stop="deleteTaskRequest(row.item)"
+                  v-show="$store.state.token">
           Delete
         </b-button>
       </template>
     </b-table>
     <b-button class="btn-outlined"
-              to="/addtask">
+              to="/addtask"
+              v-show="$store.state.token">
       Add task
     </b-button>
 
     <b-modal id="modalQuestion" @ok="deleteTask" title="Delete task?">
       <p>Do you really want to delete this task?</p>
-      <p>{{ modalQuestion.name }}</p>
+      <p><strong>{{ modalQuestion.name }}</strong></p>
     </b-modal>
   </div>
 </template>
@@ -38,6 +48,7 @@ export default {
   },
   data() {
     return {
+      message: null,
       tasks: [],
       fields: {
         name: {
@@ -63,6 +74,10 @@ export default {
             return d.toISOString().split('T')[0];
           },
         },
+        'User.name': {
+          label: 'by',
+          sortable: true,
+        },
         actions: {
           label: '',
           sortable: false,
@@ -75,11 +90,18 @@ export default {
     };
   },
   async mounted() {
-    this.loadTasks();
+    await this.loadTasks();
   },
   methods: {
     async loadTasks() {
-      this.tasks = (await TaskService.index()).data;
+      try {
+        this.tasks = (await TaskService.index()).data;
+        if (this.tasks.length === 0) {
+          this.message = 'There are no tasks.';
+        }
+      } catch (err) {
+        this.message = err.response.data.error;
+      }
     },
     deleteTaskRequest(item) {
       this.modalQuestion.id = item.id;
@@ -106,6 +128,5 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
 </style>

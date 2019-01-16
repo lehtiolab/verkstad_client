@@ -42,6 +42,11 @@ button.btn-delete {
   border: none;
 }
 
+.description {
+  min-height: 5px;
+  margin: 13px 0 13px 0;
+}
+
 .alert-info {
   color: #000;
   background-color: #9dd5f8;

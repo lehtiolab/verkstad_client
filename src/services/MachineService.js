@@ -7,6 +7,9 @@ export default {
   index() {
     return Api().get('/machines');
   },
+  machine(machineId) {
+    return Api().get(`/machine/${machineId}`);
+  },
   deleteMachine(machineId) {
     return Api().delete(`deletemachine/${machineId}`);
   },

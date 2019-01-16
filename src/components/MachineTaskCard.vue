@@ -4,7 +4,7 @@
          :class="[(data.dayDiff > -1) ? 'bar-red' : (data.dayDiff > -7)
          ? 'bar-yellow' : 'bar-blue']">
     </div>
-    <div class="task-body">
+    <div class="task-body" @click="showTaskDetails">
       <h1>{{ data.machineTask.Task.name }}</h1>
       <div class="task-machine">{{ data.machineTask.Machine.name }}</div>
       <div class="task-latest">
@@ -18,14 +18,16 @@
               :class="[(data.dayDiff > -1)
               ? 'bar-red' : (data.dayDiff > -7)
               ? 'bar-yellow' : 'bar-blue']"
-              @click.stop="checkTask">
+              :disabled="!Boolean($store.state.token)"
+              @click="checkTask">
       <font-awesome-icon icon="check-circle"/>
     </b-button>
     <b-button class="dismiss-task"
               :class="[(data.dayDiff > -1)
               ? 'bar-red' : (data.dayDiff > -7)
               ? 'bar-yellow' : 'bar-blue']"
-              @click.stop="dismissTask">
+              :disabled="!Boolean($store.state.token)"
+              @click="dismissTask">
       <font-awesome-icon icon="times-circle"/>
     </b-button>
   </li>
@@ -51,6 +53,14 @@ export default {
         params: {
           mode: 'dismiss',
           machineTaskId: this.data.machineTask.id,
+        },
+      });
+    },
+    showTaskDetails() {
+      this.$router.push({
+        name: 'taskdetails',
+        params: {
+          taskId: this.data.machineTask.Task.id,
         },
       });
     },

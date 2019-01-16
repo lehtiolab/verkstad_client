@@ -1,12 +1,46 @@
 <template>
   <div>
     <page-title-bar title="Logbook" />
+    <div class="description"></div>
+    <b-alert :show="message === null ? false : true">
+      {{ message }}
+    </b-alert>
     <b-table class="logs-table"
              :items="logs"
              :fields="fields"
+             sort-by="createdAt"
+             :sort-desc="true"
              responsive
              v-if="logs.length > 0">
+      <template slot="mode" slot-scope="row">
+        <font-awesome-icon v-if="row.value === 'check'"
+                           icon="check-circle"
+                           style="color:darkseagreen" />
+        <font-awesome-icon v-else-if="row.value === 'dismiss'"
+                           icon="times-circle"
+                           style="color:lightcoral" />
+      </template>
+      <template slot="actions" slot-scope="row">
+        <b-button size="sm"
+                  class="mr-2 btn-details"
+                  @click.stop="showDetails(row.item)"
+                  v-show="$store.state.token">
+          Details
+        </b-button>
+        <b-button size="sm"
+                  class="mr-2 btn-delete"
+                  @click.stop="deleteLogRequest(row.item)"
+                  v-show="$store.state.token">
+          Delete
+        </b-button>
+      </template>
     </b-table>
+    <b-modal id="modalQuestion" @ok="deleteLog" title="Delete log?">
+      <p>Do you really want to delete this log?</p>
+      <p>Please note: The logs are used to calculate the next
+        due dates for a given task. So there might be changes in
+        your task calendar after deleting this log.</p>
+    </b-modal>
   </div>
 </template>
 
@@ -21,48 +55,80 @@ export default {
   },
   data() {
     return {
+      message: null,
       logs: [],
       fields: {
-        name: {
-          label: 'Name',
+        mode: {
+          label: '',
+          sortable: false,
+        },
+        taskName: {
+          label: 'Task',
           sortable: true,
         },
-        machine: {
+        machineName: {
           label: 'Machine',
           sortable: true,
         },
-        user: {
-          label: 'User',
-          sortable: true,
-        },
         createdAt: {
-          label: 'Last done',
+          label: 'Done',
           sortable: true,
           formatter: (value) => {
             const d = new Date(value);
             return d.toISOString().split('T')[0];
           },
         },
-        mode: {
-          label: 'OK',
+        userName: {
+          label: 'by',
           sortable: true,
         },
+        actions: {
+          label: '',
+          sortable: false,
+        },
+      },
+      modalQuestion: {
+        id: null,
       },
     };
   },
   async mounted() {
-    const rawLogs = (await LogService.index()).data;
-    this.logs = rawLogs.map(e => ({
-      name: e.MachineTask.Task.name,
-      createdAt: e.createdAt,
-      machine: e.MachineTask.Machine.name,
-      mode: e.mode,
-      // user: e.User.name,
-    }));
+    await this.loadLogs();
+  },
+  methods: {
+    async loadLogs() {
+      try {
+        this.logs = (await LogService.index()).data;
+        if (this.logs.length === 0) {
+          this.message = 'There are no logs.';
+        }
+      } catch (err) {
+        this.message = err.response.data.error;
+      }
+    },
+    showDetails(item) {
+      this.$router.push({
+        name: 'logdetails',
+        params: {
+          logId: item.id,
+        },
+      });
+    },
+    deleteLogRequest(item) {
+      this.modalQuestion.id = item.id;
+      this.$root.$emit('bv::show::modal', 'modalQuestion');
+    },
+    async deleteLog() {
+      try {
+        await LogService.deleteLog(this.modalQuestion.id);
+        await this.loadLogs();
+      } catch (err) {
+        this.message = err.response.data.error;
+      }
+    },
   },
 };
 </script>
 
-<style>
-
+<style scoped>
 </style>
