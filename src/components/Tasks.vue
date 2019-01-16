@@ -13,8 +13,8 @@
       <template slot="actions" slot-scope="row">
         <b-button size="sm"
                   class="mr-2 btn-details"
-                  @click.stop="showDetails(row.item)">
-          Details
+                  @click.stop="showEdit(row.item)">
+          Edit
         </b-button>
         <b-button size="sm"
                   class="mr-2 btn-delete"
@@ -25,7 +25,7 @@
       </template>
     </b-table>
     <b-button class="btn-outlined"
-              to="/addtask"
+              to="/addedittask/add"
               v-show="$store.state.token">
       Add task
     </b-button>
@@ -116,9 +116,9 @@ export default {
         this.message = err.response.data.error;
       }
     },
-    showDetails(item) {
+    showEdit(item) {
       this.$router.push({
-        name: 'taskdetails',
+        name: 'addedittask',
         params: {
           taskId: item.id,
         },

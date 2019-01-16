@@ -12,7 +12,7 @@
              :sort-desc="true"
              responsive
              v-if="logs.length > 0">
-      <template slot="mode" slot-scope="row">
+      <template slot="status" slot-scope="row">
         <font-awesome-icon v-if="row.value === 'check'"
                            icon="check-circle"
                            style="color:darkseagreen" />
@@ -37,9 +37,6 @@
     </b-table>
     <b-modal id="modalQuestion" @ok="deleteLog" title="Delete log?">
       <p>Do you really want to delete this log?</p>
-      <p>Please note: The logs are used to calculate the next
-        due dates for a given task. So there might be changes in
-        your task calendar after deleting this log.</p>
     </b-modal>
   </div>
 </template>
@@ -58,15 +55,15 @@ export default {
       message: null,
       logs: [],
       fields: {
-        mode: {
+        status: {
           label: '',
           sortable: false,
         },
-        taskName: {
+        task: {
           label: 'Task',
           sortable: true,
         },
-        machineName: {
+        machine: {
           label: 'Machine',
           sortable: true,
         },
@@ -78,7 +75,7 @@ export default {
             return d.toISOString().split('T')[0];
           },
         },
-        userName: {
+        user: {
           label: 'by',
           sortable: true,
         },

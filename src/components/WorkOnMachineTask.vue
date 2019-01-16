@@ -70,10 +70,9 @@ export default {
     async saveLog() {
       try {
         await LogService.add({
-          mode: this.mode,
+          status: this.mode,
           machineTaskId: this.machineTask.id,
           comment: this.comment,
-          userId: null,
         });
         this.$router.push({
           path: '/',

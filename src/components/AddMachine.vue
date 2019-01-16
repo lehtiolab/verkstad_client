@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-title-bar title="Add machine" />
+    <page-title-bar title="Add machine" :showBack="true" />
     <div class="description">Register a new mass spectrometer.</div>
     <b-alert :show="message === null ? false : true">
       {{ message }}

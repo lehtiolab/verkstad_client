@@ -1,11 +1,13 @@
 <template>
   <div>
-    <page-title-bar title="Add task" />
-    <div class="description">Create a new maintenance task.</div>
+    <page-title-bar title="Add task" :showBack="true" v-if="taskId === 'add'"/>
+    <page-title-bar :title="task.name" :showBack="true" v-if="taskId !== 'add'"/>
+    <div class="description" v-if="taskId === 'add'">Create a new maintenance task.</div>
+    <div class="description" v-if="taskId !== 'add'">Edit a maintenance task.</div>
     <b-alert :show="message === null ? false : true">
       {{ message }}
     </b-alert>
-    <b-form @submit="addTask" @reset="reset" autocomplete="off" v-if="showForm">
+    <b-form @submit="addEditTask" @reset="reset" autocomplete="off" v-if="showForm">
       <b-form-group id="nameLabel"
                     label="Name:"
                     label-for="name">
@@ -26,9 +28,12 @@
       </b-form-group>
       <b-form-group id="machineLabel"
                     label="Select machines:"
-                    label-for="machines">
+                    label-for="machines"
+                    :description="(taskId !== 'add')
+                      ? 'Changing the machine selection will rearrange tasks.'
+                      : ''">
         <b-form-select id="machines"
-                       v-model="task.machineIds"
+                       v-model="machineIds"
                        :options="machines"
                        multiple>
         </b-form-select>
@@ -58,14 +63,11 @@
                       placeholder="in days">
         </b-form-input>
       </b-form-group>
-      <b-button type="submit" class="btn-outlined">Add task</b-button>
+      <b-button type="submit" class="btn-outlined">
+        {{ (taskId === 'add') ? 'Add task' : 'Save changes' }}
+      </b-button>
       <b-button type="reset" class="btn-outlined">Reset</b-button>
     </b-form>
-    <b-button class="btn-outlined"
-              to="/addmachine"
-              v-if="!showForm">
-      Add machine
-    </b-button>
   </div>
 </template>
 
@@ -75,28 +77,29 @@ import TaskService from '../services/TaskService';
 import MachineService from '../services/MachineService';
 
 export default {
-  name: 'AddTask',
+  name: 'AddEditTask',
   components: {
     PageTitleBar,
   },
+  props: ['taskId'],
   data() {
     return {
       task: {
         name: '',
         description: '',
-        machineIds: [],
         repare: '',
         startDate: '',
         interval: '',
       },
+      machineIds: [],
       machines: [],
+      selectedMachines: [],
       showForm: true,
       message: null,
     };
   },
   async mounted() {
     const machines = (await MachineService.index()).data;
-
     if (machines.length === 0) {
       this.message = 'First you have to define a mass spec in the machines tab.';
       this.showForm = false;
@@ -106,20 +109,36 @@ export default {
       value: element.id,
       text: element.name,
     }));
+
+    if (this.taskId !== 'add') {
+      const task = (await TaskService.task(this.taskId)).data;
+      this.task = {
+        ...task,
+        startDate: task.startDate.split('T')[0],
+      };
+
+      this.machineIds = this.task.MachineTasks.map(
+        machineTask => machineTask.Machine.id,
+      );
+    }
   },
   methods: {
-    async addTask() {
+    async addEditTask() {
       try {
-        await TaskService.add({
-          task: {
-            name: this.task.name,
-            description: this.task.description,
-            repare: this.task.repare,
-            startDate: new Date(this.task.startDate),
-            interval: this.task.interval,
-          },
-          machineIds: this.task.machineIds,
-        });
+        if (this.taskId === 'add') {
+          await TaskService.add({
+            task: this.task,
+            machineIds: this.machineIds,
+          });
+        } else {
+          await TaskService.update({
+            task: {
+              id: this.taskId,
+              ...this.task,
+            },
+            machineIds: this.machineIds,
+          });
+        }
         this.$router.push({
           path: '/tasks',
         });

@@ -1,6 +1,6 @@
 <template>
   <div class="log-details">
-    <page-title-bar :title="log.MachineTask.Task.name" showBack="true" v-if="log" />
+    <page-title-bar :title="log.task" :showBack="true" v-if="log" />
     <page-title-bar title="Error" showBack="true" v-if="!log" />
     <div class="description"></div>
     <b-alert :show="message === null ? false : true">
@@ -9,22 +9,22 @@
     <table class="log-details-table" v-if="log">
       <tr>
         <td class="row-title">Description</td>
-        <td>{{ log.MachineTask.Task.description }}</td>
+        <td>{{ log.description }}</td>
       </tr>
       <tr>
         <td class="row-title">If not OK</td>
-        <td>{{ log.MachineTask.Task.repare }}</td>
+        <td>{{ log.repare }}</td>
       </tr>
       <tr>
         <td class="row-title">Interval</td>
         <td>
-          {{ log.MachineTask.Task.interval + ((log.MachineTask.Task.interval === 1)
+          {{ log.interval + ((log.interval === 1)
              ? ' day' : ' days')}}
         </td>
       </tr>
       <tr>
         <td class="row-title">Machine</td>
-        <td>{{ log.MachineTask.Machine.name }}</td>
+        <td>{{ log.machine }}</td>
       </tr>
       <tr>
         <td class="row-title">Done</td>
@@ -32,7 +32,7 @@
       </tr>
       <tr>
         <td class="row-title">By</td>
-        <td>{{ log.User.name }}</td>
+        <td>{{ log.user }}</td>
       </tr>
       <tr>
         <td class="row-title">Comment</td>

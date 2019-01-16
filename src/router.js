@@ -9,7 +9,7 @@ import Login from './components/Login.vue';
 import Machines from './components/Machines.vue';
 import AddMachine from './components/AddMachine.vue';
 import Tasks from './components/Tasks.vue';
-import AddTask from './components/AddTask.vue';
+import AddEditTask from './components/AddEditTask.vue';
 import TaskDetails from './components/TaskDetails.vue';
 import WorkOnMachineTask from './components/WorkOnMachineTask.vue';
 import MachineQC from './components/MachineQC.vue';
@@ -67,9 +67,10 @@ export default new Router({
       component: Tasks,
     },
     {
-      path: '/addtask',
-      name: 'addtask',
-      component: AddTask,
+      path: '/addedittask/:taskId',
+      name: 'addedittask',
+      component: AddEditTask,
+      props: true,
     },
     {
       path: '/taskdetails/:taskId',

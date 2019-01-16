@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-title-bar title="Login" />
+    <page-title-bar title="Login" :showBack="true" />
     <div class="description">Come in and take care of your mass specs.</div>
     <b-alert :show="loginMessage === null ? false : true">
       {{ loginMessage }}

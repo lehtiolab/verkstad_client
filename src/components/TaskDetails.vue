@@ -1,6 +1,6 @@
 <template>
   <div class="task-details">
-    <page-title-bar :title="task.name" showBack="true" v-if="task" />
+    <page-title-bar :title="task.name" :showBack="true" v-if="task" />
     <page-title-bar title="Error" showBack="true" v-if="!task" />
     <div class="description"></div>
     <b-alert :show="message === null ? false : true">

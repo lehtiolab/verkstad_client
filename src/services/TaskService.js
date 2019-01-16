@@ -4,6 +4,9 @@ export default {
   add(properties) {
     return Api().post('/addtask', properties);
   },
+  update(properties) {
+    return Api().put(`/updatetask/${properties.task.id}`, properties);
+  },
   index() {
     return Api().get('/tasks');
   },

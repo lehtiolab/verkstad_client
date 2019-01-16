@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-title-bar title="Sign up" />
+    <page-title-bar title="Sign up" :showBack="true" />
     <div class="description">Register a new user for this app by submitting the form below.</div>
     <b-alert :show="signUpMessage === null ? false : true">
       {{ signUpMessage }}
