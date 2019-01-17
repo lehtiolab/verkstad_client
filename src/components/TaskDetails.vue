@@ -17,7 +17,7 @@
       </tr>
       <tr>
         <td class="row-title">First due date</td>
-        <td>{{ task.startDate }}</td>
+        <td>{{ task.startDate.split('T')[0] }}</td>
       </tr>
       <tr>
         <td class="row-title">Interval</td>
@@ -56,7 +56,7 @@ export default {
       machineNames: [],
     };
   },
-  async mounted() {
+  async created() {
     try {
       this.task = (await TaskService.task(this.taskId)).data;
       const names = this.task.MachineTasks.map(

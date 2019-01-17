@@ -67,7 +67,7 @@ export default {
       message: null,
     };
   },
-  async mounted() {
+  async created() {
     if (this.machineId !== 'add') {
       this.machine = (await MachineService.machine(this.machineId)).data;
     }

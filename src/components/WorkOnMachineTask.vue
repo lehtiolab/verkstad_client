@@ -63,7 +63,7 @@ export default {
       message: null,
     };
   },
-  async mounted() {
+  async created() {
     this.machineTask = (await MachineTaskService.machineTask(this.machineTaskId)).data.machineTask;
   },
   methods: {

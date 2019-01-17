@@ -26,7 +26,7 @@ export default {
       plots: null,
     };
   },
-  async mounted() {
+  async created() {
     try {
       this.machine = (await MachineService.machine(this.machineId)).data;
       if (this.machine.length === 0) {

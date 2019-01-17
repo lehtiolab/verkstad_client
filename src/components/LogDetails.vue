@@ -71,7 +71,7 @@ export default {
       log: null,
     };
   },
-  async mounted() {
+  async created() {
     try {
       this.log = (await LogService.log(this.logId)).data;
     } catch (err) {

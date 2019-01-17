@@ -21,7 +21,7 @@ export default {
       days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     };
   },
-  mounted() {
+  created() {
     const d = new Date();
     this.today = [this.days[d.getDay()], d.toISOString().split('T')[0]].join(', ');
   },

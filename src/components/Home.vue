@@ -53,14 +53,14 @@ export default {
       reloadInterval: 60000, // 1 min
     };
   },
-  async mounted() {
+  async created() {
     await this.loadMachineTasks();
-    setInterval(async () => {
+    this.$options.interval = setInterval(async () => {
       await this.loadMachineTasks();
     }, this.reloadInterval);
   },
   beforeDestroy() {
-    clearInterval();
+    clearInterval(this.$options.interval);
   },
   methods: {
     async loadMachineTasks() {

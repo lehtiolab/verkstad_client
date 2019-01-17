@@ -89,7 +89,7 @@ export default {
       },
     };
   },
-  async mounted() {
+  async created() {
     await this.loadTasks();
   },
   methods: {

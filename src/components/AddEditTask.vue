@@ -98,7 +98,7 @@ export default {
       message: null,
     };
   },
-  async mounted() {
+  async created() {
     const machines = (await MachineService.index()).data;
     if (machines.length === 0) {
       this.message = 'First you have to define a mass spec in the machines tab.';
