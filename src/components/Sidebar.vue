@@ -20,7 +20,7 @@
       </b-nav-text>
       <b-nav-item to="/login" v-if="!$store.state.user">Login</b-nav-item>
       <b-nav-item @click="logout" v-if="$store.state.user">Logout</b-nav-item>
-      <a href="#" class="seemless" @click="fullScreen">Full screen</a>
+      <!-- <a href="#" class="seemless" @click="fullScreen">Full screen</a> -->
     </div>
     <div class="navbar-footer">
       <b-nav-text>Lehtiö Lab {{ year }}</b-nav-text>
@@ -39,9 +39,9 @@ export default {
     logout() {
       this.$store.dispatch('logout');
     },
-    fullScreen() {
-      document.documentElement.webkitRequestFullScreen();
-    },
+    // fullScreen() {
+    //   document.documentElement.webkitRequestFullScreen();
+    // },
   },
 };
 </script>

@@ -32,7 +32,7 @@
                     label-for="comment">
         <b-form-textarea id="comment"
                          :class="[(mode === 'check') ? 'green-textarea' : 'red-textarea']"
-                         v-model.trim="comment"
+                         v-model="comment"
                          placeholder="Enter some notes"
                          rows="3"
                          :no-resize="true">

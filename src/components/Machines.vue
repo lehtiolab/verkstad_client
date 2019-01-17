@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="machines-wrapper">
     <page-title-bar title="Machines" />
     <div class="description"></div>
     <b-alert :show="message === null ? false : true">
@@ -11,7 +11,16 @@
              responsive
              v-if="machines.length > 0">
       <template slot="actions" slot-scope="row">
-        <b-button size="sm" class="mr-2 btn-showqc" @click.stop="showQC(row.item)" v-if="false">
+        <b-button size="sm"
+                  class="mr-2 btn-details"
+                  v-show="$store.state.token"
+                  @click.stop="editMachine(row.item)">
+          Edit
+        </b-button>
+        <b-button size="sm"
+                  class="mr-2 btn-showqc"
+                  @click.stop="showQC(row.item)"
+                  v-if="false">
           Show QC
         </b-button>
         <b-button size="sm"
@@ -23,7 +32,7 @@
       </template>
     </b-table>
     <b-button class="btn-outlined"
-              to="/addmachine"
+              to="/addeditmachine/add"
               v-show="$store.state.token">
       Add machine
     </b-button>
@@ -107,6 +116,14 @@ export default {
       };
       this.$root.$emit('bv::show::modal', 'modalQuestion');
     },
+    editMachine(item) {
+      this.$router.push({
+        name: 'addeditmachine',
+        params: {
+          machineId: item.id,
+        },
+      });
+    },
     showQC(item) {
       this.$router.push({
         name: 'machineqc',
@@ -130,6 +147,10 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+machines-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 </style>

@@ -7,7 +7,7 @@ import Users from './components/Users.vue';
 import Signup from './components/Signup.vue';
 import Login from './components/Login.vue';
 import Machines from './components/Machines.vue';
-import AddMachine from './components/AddMachine.vue';
+import AddEditMachine from './components/AddEditMachine.vue';
 import Tasks from './components/Tasks.vue';
 import AddEditTask from './components/AddEditTask.vue';
 import TaskDetails from './components/TaskDetails.vue';
@@ -57,9 +57,10 @@ export default new Router({
       component: Machines,
     },
     {
-      path: '/addmachine',
-      name: 'addmachine',
-      component: AddMachine,
+      path: '/addeditmachine/:machineId',
+      name: 'addeditmachine',
+      component: AddEditMachine,
+      props: true,
     },
     {
       path: '/tasks',

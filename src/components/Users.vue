@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="users-wrapper">
     <page-title-bar title="Users" />
     <div class="description"></div>
     <b-alert :show="message === null ? false : true">
@@ -30,7 +30,8 @@
       <p>Do you really want to kick out this user?</p>
       <p><strong>{{ modalQuestion.userName }}<br />
          {{ modalQuestion.userEMail }}</strong></p>
-      <p v-if="$store.state.user"
+      <p style="color: crimson; font-weight: bold"
+         v-if="$store.state.user"
          v-show="$store.state.user.email === modalQuestion.userEMail">
         Warning: You are going to delete yourself. If you continue,
         you will be logged out automatically.
@@ -120,4 +121,9 @@ export default {
 </script>
 
 <style scoped>
+users-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 </style>

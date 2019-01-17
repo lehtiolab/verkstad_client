@@ -1,11 +1,13 @@
 <template>
   <div>
-    <page-title-bar title="Add machine" :showBack="true" />
-    <div class="description">Register a new mass spectrometer.</div>
+    <page-title-bar title="Add machine" :showBack="true" v-if="machineId === 'add'" />
+    <page-title-bar :title="machine.name" :showBack="true" v-if="machineId !== 'add'"/>
+    <div class="description" v-if="machineId === 'add'">Register a new mass spectrometer.</div>
+    <div class="description" v-else>Edit the mass spectrometer.</div>
     <b-alert :show="message === null ? false : true">
       {{ message }}
     </b-alert>
-    <b-form @submit="addMachine" @reset="reset" autocomplete="off" v-if="showForm">
+    <b-form @submit="addEditMachine" @reset="reset" autocomplete="off" v-if="showForm">
       <b-form-group id="nameLabel"
                     label="Name:"
                     label-for="name">
@@ -33,7 +35,12 @@
                       placeholder="Enter Kantele ID">
         </b-form-input>
       </b-form-group>
-      <b-button type="submit" class="btn-outlined">Add machine</b-button>
+      <b-button type="submit" class="btn-outlined" v-if="machineId === 'add'">
+        Add machine
+      </b-button>
+      <b-button type="submit" class="btn-outlined" v-if="machineId !== 'add'">
+        Save changes
+      </b-button>
       <b-button type="reset" class="btn-outlined">Reset</b-button>
     </b-form>
   </div>
@@ -44,10 +51,11 @@ import PageTitleBar from './PageTitleBar.vue';
 import MachineService from '../services/MachineService';
 
 export default {
-  name: 'AddMachine',
+  name: 'AddEditMachine',
   components: {
     PageTitleBar,
   },
+  props: ['machineId'],
   data() {
     return {
       machine: {
@@ -59,14 +67,19 @@ export default {
       message: null,
     };
   },
+  async mounted() {
+    if (this.machineId !== 'add') {
+      this.machine = (await MachineService.machine(this.machineId)).data;
+    }
+  },
   methods: {
-    async addMachine() {
+    async addEditMachine() {
       try {
-        await MachineService.add({
-          name: this.machine.name,
-          type: this.machine.type,
-          kanteleId: this.machine.kanteleId,
-        });
+        if (this.machineId === 'add') {
+          await MachineService.add(this.machine);
+        } else {
+          await MachineService.update(this.machine);
+        }
         this.$router.push({
           path: '/machines',
         });
