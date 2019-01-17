@@ -50,27 +50,39 @@ export default {
         today: null,
         upcoming: null,
       },
+      reloadInterval: 60000, // 1 min
     };
   },
   async mounted() {
-    try {
-      const dueMachineTasks = (await MachineTaskService.index()).data.machineTasks;
-      if (dueMachineTasks.length === 0) {
-        this.machineTasksAvailable = false;
-        this.message = 'There are no upcoming tasks. '
-                       + 'Please define new tasks.';
-      } else {
-        this.dueMachineTasks.today = dueMachineTasks.filter(
-          machineTask => machineTask.dayDiff >= -1,
-        );
-        this.dueMachineTasks.upcoming = dueMachineTasks.filter(
-          machineTask => machineTask.dayDiff < -1,
-        );
-        this.machineTasksAvailable = true;
+    await this.loadMachineTasks();
+    setInterval(async () => {
+      await this.loadMachineTasks();
+    }, this.reloadInterval);
+  },
+  beforeDestroy() {
+    clearInterval();
+  },
+  methods: {
+    async loadMachineTasks() {
+      try {
+        const dueMachineTasks = (await MachineTaskService.index()).data.machineTasks;
+        if (dueMachineTasks.length === 0) {
+          this.machineTasksAvailable = false;
+          this.message = 'There are no upcoming tasks. '
+                          + 'Please define new tasks.';
+        } else {
+          this.dueMachineTasks.today = dueMachineTasks.filter(
+            machineTask => machineTask.dayDiff >= -1,
+          );
+          this.dueMachineTasks.upcoming = dueMachineTasks.filter(
+            machineTask => machineTask.dayDiff < -1,
+          );
+          this.machineTasksAvailable = true;
+        }
+      } catch (err) {
+        this.message = err.response.data.error;
       }
-    } catch (err) {
-      this.message = err.response.data.error;
-    }
+    },
   },
   computed: {
     orderedDueMachineTasks() {
