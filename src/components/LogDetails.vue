@@ -8,34 +8,47 @@
     </b-alert>
     <table class="log-details-table" v-if="log">
       <tr>
-        <td class="row-title">Description</td>
+        <td class="row-title">Satus:</td>
+        <td>
+          <font-awesome-icon icon="check-circle"
+                             style="color: darkgreen"
+                             v-if="log.status === 'check'" />
+          <font-awesome-icon icon="times-circle"
+                             style="color: crimson"
+                             v-if="log.status === 'dismiss'" />
+        </td>
+      </tr>
+      <tr>
+        <td class="row-title">Description:</td>
         <td>{{ log.description }}</td>
       </tr>
       <tr>
-        <td class="row-title">If not OK</td>
+        <td class="row-title">If not OK:</td>
         <td>{{ log.repare }}</td>
       </tr>
       <tr>
-        <td class="row-title">Interval</td>
+        <td class="row-title">Interval:</td>
         <td>
           {{ log.interval + ((log.interval === 1)
              ? ' day' : ' days')}}
         </td>
       </tr>
       <tr>
-        <td class="row-title">Machine</td>
+        <td class="row-title">Machine:</td>
         <td>{{ log.machine }}</td>
       </tr>
       <tr>
-        <td class="row-title">Done</td>
+        <td class="row-title">Done:</td>
         <td>{{ log.createdAt.split('T')[0] }}</td>
       </tr>
       <tr>
-        <td class="row-title">By</td>
+        <td class="row-title">By:</td>
         <td>{{ log.user }}</td>
       </tr>
+      <tr class="spacer">
+      </tr>
       <tr>
-        <td class="row-title">Comment</td>
+        <td class="row-title">Comment:</td>
         <td>{{ log.comment }}</td>
       </tr>
     </table>
@@ -75,8 +88,12 @@ table {
 }
 
 .row-title {
-  width: 17%;
+  min-width: 100px;
   font-weight: bold;
   vertical-align: top;
+}
+
+.spacer {
+  height: 20px;
 }
 </style>

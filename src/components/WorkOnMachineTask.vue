@@ -14,15 +14,15 @@
     </b-alert>
     <table>
       <tr>
-        <td>What to do:</td>
+        <td class="row-title">What to do:</td>
         <td>{{ machineTask.Task.description }}</td>
       </tr>
       <tr>
-        <td>If not OK:</td>
+        <td class="row-title">If not OK:</td>
         <td>{{ machineTask.Task.repare }}</td>
       </tr>
       <tr>
-        <td>Machine:</td>
+        <td class="row-title">Machine:</td>
         <td>{{ machineTask.Machine.name }}</td>
       </tr>
     </table>
@@ -96,6 +96,11 @@ table {
   width: 50%;
   margin: 0 0 20px 0;
   line-height: 2rem;
+}
+
+.row-title {
+  min-width: 100px;
+  vertical-align: top;
 }
 
 form {

@@ -77,7 +77,7 @@ table {
 }
 
 .row-title {
-  width: 17%;
+  min-width: 100px;
   font-weight: bold;
   vertical-align: top;
 }
