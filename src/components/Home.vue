@@ -16,7 +16,7 @@
           </machine-task-card>
           <li v-if="orderedDueMachineTasks.today.length === 0">
             <b-alert :show="true">
-              <div>All tasks done foor today.</div>
+              <div>All tasks done for today.</div>
               <div v-if="new Date().getDay() === 1">Not bad for a Monday!</div>
               <div v-if="new Date().getDay() === 4">It's Thursday, why not going for the pub?</div>
               <div v-if="new Date().getDay() === 5">Go home! It's almost weekend!</div>

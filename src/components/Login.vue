@@ -59,7 +59,6 @@ export default {
           password: this.user.password,
         });
         this.$store.dispatch('setUser', response.data);
-        this.loginMessage = 'Successfully logged in!';
         this.showForm = false;
         this.$router.push({
           path: this.$store.state.route.from.fullPath,

@@ -48,15 +48,20 @@
       </b-form-group>
       <b-form-group id="startLabel"
                     label="Start date:"
-                    label-for="start">
+                    label-for="start"
+                    description="If the start date is during a weekend,
+                      the task is postponed to the next Monday instead.">
         <b-form-input id="start"
+                      ref="start"
                       type="date"
                       v-model="task.startDate">
         </b-form-input>
       </b-form-group>
       <b-form-group id="intervalLabel"
                     label="Interval:"
-                    label-for="interval">
+                    label-for="interval"
+                    description="If the interval leads to a due date during a weekend,
+                      the task is postponed to the next Monday instead.">
         <b-form-input id="interval"
                       type="number"
                       v-model="task.interval"
