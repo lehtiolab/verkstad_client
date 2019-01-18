@@ -35,6 +35,8 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
+  min-height: 120px;
+  max-height: 120px;
   margin: 0;
   padding: 20px 0 20px 0;
   font-family: 'Work Sans', sans-serif;
