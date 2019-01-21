@@ -144,6 +144,7 @@ export default {
             machineIds: this.machineIds,
           });
         }
+        this.message = null;
         this.$router.push({
           path: '/tasks',
         });

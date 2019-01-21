@@ -83,6 +83,7 @@ export default {
         } else {
           await MachineService.update(this.machine);
         }
+        this.message = null;
         this.$router.push({
           path: '/machines',
         });

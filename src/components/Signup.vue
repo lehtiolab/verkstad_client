@@ -70,6 +70,7 @@ export default {
           name: this.user.name,
           password: this.user.password,
         });
+        this.message = null;
         this.$router.push({
           path: '/users',
         });

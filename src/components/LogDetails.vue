@@ -74,6 +74,7 @@ export default {
   async created() {
     try {
       this.log = (await LogService.log(this.logId)).data;
+      this.message = null;
     } catch (err) {
       if (err.response) {
         this.message = err.response.data.error;

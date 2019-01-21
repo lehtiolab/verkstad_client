@@ -104,6 +104,8 @@ export default {
         this.machines = (await MachineService.index()).data;
         if (this.machines.length === 0) {
           this.message = 'There are no machines.';
+        } else {
+          this.message = null;
         }
       } catch (err) {
         if (err.response) {
@@ -140,6 +142,7 @@ export default {
       try {
         await MachineService.deleteMachine(this.modalQuestion.id);
         await this.loadMachines();
+        this.message = null;
       } catch (err) {
         if (err.response) {
           this.message = err.response.data.error;

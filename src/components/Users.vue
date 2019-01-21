@@ -90,6 +90,8 @@ export default {
         this.users = (await AuthenticationService.index()).data;
         if (this.users.length === 0) {
           this.message = 'There are no users registered.';
+        } else {
+          this.message = null;
         }
       } catch (err) {
         if (err.response) {
@@ -113,6 +115,7 @@ export default {
           this.logout();
         }
         this.loadUsers();
+        this.message = null;
       } catch (err) {
         if (err.response) {
           this.message = err.response.data.error;

@@ -63,6 +63,7 @@ export default {
         machineTask => machineTask.Machine.name,
       );
       this.machineNames = names.filter((value, index, self) => self.indexOf(value) === index);
+      this.message = null;
     } catch (err) {
       if (err.response) {
         this.message = err.response.data.error;

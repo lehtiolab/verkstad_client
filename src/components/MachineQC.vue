@@ -35,6 +35,7 @@ export default {
         this.message = 'You have not provided a Kantele ID. No QC data can be fetched.';
       } else {
         this.loadPlots();
+        this.message = null;
       }
     } catch (err) {
       if (err.response) {
@@ -48,7 +49,7 @@ export default {
     async loadPlots() {
       try {
         this.plots = (await MachineQCService.getQCPlots(this.machine.kanteleId)).data;
-        this.message = this.plots;
+        this.message = null;
       } catch (err) {
         if (err.response) {
           this.message = err.response.data.error;

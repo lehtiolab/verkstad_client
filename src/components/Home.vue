@@ -86,6 +86,7 @@ export default {
             machineTask => machineTask.dayDiff < -1,
           );
           this.machineTasksAvailable = true;
+          this.message = null;
         }
       } catch (err) {
         if (err.response) {

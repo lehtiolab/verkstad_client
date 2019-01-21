@@ -98,6 +98,8 @@ export default {
         this.tasks = (await TaskService.index()).data;
         if (this.tasks.length === 0) {
           this.message = 'There are no tasks.';
+        } else {
+          this.message = null;
         }
       } catch (err) {
         if (err.response) {
@@ -116,6 +118,7 @@ export default {
       try {
         await TaskService.deleteTask(this.modalQuestion.id);
         await this.loadTasks();
+        this.message = null;
       } catch (err) {
         if (err.response) {
           this.message = err.response.data.error;

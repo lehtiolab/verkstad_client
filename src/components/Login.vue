@@ -59,7 +59,7 @@ export default {
           password: this.user.password,
         });
         this.$store.dispatch('setUser', response.data);
-        this.showForm = false;
+        this.message = null;
         this.$router.push({
           name: this.$store.state.route.from.name,
         });

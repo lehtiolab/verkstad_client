@@ -74,6 +74,7 @@ export default {
           machineTaskId: this.machineTask.id,
           comment: this.comment,
         });
+        this.message = null;
         this.$router.push({
           path: '/',
         });

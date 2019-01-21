@@ -98,6 +98,8 @@ export default {
         this.logs = (await LogService.index()).data;
         if (this.logs.length === 0) {
           this.message = 'There are no logs.';
+        } else {
+          this.message = null;
         }
       } catch (err) {
         if (err.response) {
@@ -123,6 +125,7 @@ export default {
       try {
         await LogService.deleteLog(this.modalQuestion.id);
         await this.loadLogs();
+        this.message = null;
       } catch (err) {
         if (err.response) {
           this.message = err.response.data.error;
