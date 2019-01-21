@@ -11,10 +11,10 @@
         <td class="row-title">Satus:</td>
         <td>
           <font-awesome-icon icon="check-circle"
-                             style="color: darkgreen"
+                             style="color: darkseagreen"
                              v-if="log.status === 'check'" />
           <font-awesome-icon icon="times-circle"
-                             style="color: crimson"
+                             style="color: lightcoral"
                              v-if="log.status === 'dismiss'" />
         </td>
       </tr>
