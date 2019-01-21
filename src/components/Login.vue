@@ -52,7 +52,7 @@ export default {
     };
   },
   methods: {
-    async login(evt) {
+    async login() {
       try {
         const response = await AuthenticationService.login({
           email: this.user.email,

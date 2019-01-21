@@ -7,7 +7,10 @@
     <b-alert :show="message === null ? false : true">
       {{ message }}
     </b-alert>
-    <b-form @submit.prevent="addEditMachine" @reset.prevent="reset" autocomplete="off" v-if="showForm">
+    <b-form @submit.prevent="addEditMachine"
+            @reset.prevent="reset"
+            autocomplete="off"
+            v-if="showForm">
       <b-form-group id="nameLabel"
                     label="Name:"
                     label-for="name">

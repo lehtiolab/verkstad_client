@@ -151,7 +151,7 @@ export default {
         this.message = err.response.data.error;
       }
     },
-    reset(evt) {
+    reset() {
       this.task.name = '';
       this.task.description = '';
       this.task.machineId = null;
