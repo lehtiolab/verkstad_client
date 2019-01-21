@@ -1,9 +1,9 @@
 # Verkstad
-*The mass spectrometry maintenance app*
+
+_The mass spectrometry maintenance app_
 
 ![Home page](https://raw.githubusercontent.com/mtstahl/client_mstodos/master/screenshots/screenshot_01.png)
-![Add a new task](https://raw.githubusercontent.com/mtstahl/client_mstodos/master/screenshots/screenshot_02.png)
-![Check a task](https://raw.githubusercontent.com/mtstahl/client_mstodos/master/screenshots/screenshot_03.png)
+Tasks to be done.
 
 ## What does this piece of software do?
 
@@ -19,7 +19,14 @@ The frontend (which you see here) is able to commuicate with a
 [server-based node.js app](https://github.com/mtstahl/server_mstodos), which
 maintaines a sqlite database.
 
+![Add a new task](https://raw.githubusercontent.com/mtstahl/client_mstodos/master/screenshots/screenshot_02.png)
+Add a new task.
+
+![Check a task](https://raw.githubusercontent.com/mtstahl/client_mstodos/master/screenshots/screenshot_03.png)
+Check a task.
+
 ## Can I use Verkstad, too?
+
 Yes, of course. Just clone this repo and run `npm run build`. The resulting
 `dist` folder is ready to be served by your machines. Also clone the
 [server repo](https://github.com/mtstahl/server_mstodos) and adjust
