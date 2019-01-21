@@ -1,6 +1,10 @@
 # Verkstad
 *The mass spectrometry maintenance app*
 
+![Home page](https://raw.githubusercontent.com/mtstahl/client_mstodos/master/screenshots/screenshot_01.png)
+![Add a new task](https://raw.githubusercontent.com/mtstahl/client_mstodos/master/screenshots/screenshot_02.png)
+![Check a task](https://raw.githubusercontent.com/mtstahl/client_mstodos/master/screenshots/screenshot_03.png)
+
 ## What does this piece of software do?
 
 This is vue.js-based todo app, which serves and is intended to organize tasks for the maintenance of
