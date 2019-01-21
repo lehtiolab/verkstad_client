@@ -17,8 +17,9 @@ import MachineQC from './components/MachineQC.vue';
 Vue.use(Router);
 
 export default new Router({
-  // mode: 'history',
+  mode: 'history',
   // base: process.env.BASE_URL,
+  hash: false,
   routes: [
     {
       path: '/',
@@ -93,7 +94,7 @@ export default new Router({
     },
     {
       path: '*',
-      redirect: 'home',
+      redirect: '/',
     },
   ],
 });

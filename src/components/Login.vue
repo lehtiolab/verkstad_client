@@ -5,7 +5,7 @@
     <b-alert :show="loginMessage === null ? false : true">
       {{ loginMessage }}
     </b-alert>
-    <b-form @submit="login" @reset="reset" v-if="showForm">
+    <b-form @submit.prevent="login" @reset.prevent="reset" v-if="showForm">
       <b-form-group id="emailLabel"
                     label="eMail address:"
                     label-for="email">
@@ -52,7 +52,7 @@ export default {
     };
   },
   methods: {
-    async login() {
+    async login(evt) {
       try {
         const response = await AuthenticationService.login({
           email: this.user.email,
@@ -61,14 +61,13 @@ export default {
         this.$store.dispatch('setUser', response.data);
         this.showForm = false;
         this.$router.push({
-          path: this.$store.state.route.from.fullPath,
+          name: this.$store.state.route.from.name,
         });
       } catch (error) {
         this.loginMessage = error.response.data.error;
       }
     },
-    reset(evt) {
-      evt.preventDefault();
+    reset() {
       this.user.email = '';
       this.user.name = '';
       this.user.password = '';

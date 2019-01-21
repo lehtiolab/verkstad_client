@@ -26,7 +26,7 @@
         <td>{{ machineTask.Machine.name }}</td>
       </tr>
     </table>
-    <b-form @submit="saveLog" @reset="reset" v-if="showForm">
+    <b-form @submit.prevent="saveLog" @reset.prevent="reset" v-if="showForm">
       <b-form-group id="commentLabel"
                     label="Comment:"
                     label-for="comment">
@@ -81,8 +81,7 @@ export default {
         this.message = err.response.data.error;
       }
     },
-    reset(evt) {
-      evt.preventDefault();
+    reset() {
       this.comment = '';
       this.showForm = false;
       this.$nextTick(() => { this.showForm = true; });

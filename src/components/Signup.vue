@@ -5,7 +5,7 @@
     <b-alert :show="signUpMessage === null ? false : true">
       {{ signUpMessage }}
     </b-alert>
-    <b-form @submit="signUp" @reset="reset" autocomplete="off" v-if="showForm">
+    <b-form @submit.prevent="signUp" @reset.prevent="reset" autocomplete="off" v-if="showForm">
       <b-form-group id="emailLabel"
                     label="eMail address:"
                     label-for="email">
@@ -77,8 +77,7 @@ export default {
         this.signUpMessage = error.response.data.error;
       }
     },
-    reset(evt) {
-      evt.preventDefault();
+    reset() {
       this.user.email = '';
       this.user.name = '';
       this.user.password = '';

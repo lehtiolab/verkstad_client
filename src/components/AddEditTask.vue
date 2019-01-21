@@ -7,7 +7,7 @@
     <b-alert :show="message === null ? false : true">
       {{ message }}
     </b-alert>
-    <b-form @submit="addEditTask" @reset="reset" autocomplete="off" v-if="showForm">
+    <b-form @submit.prevent="addEditTask" @reset.prevent="reset" autocomplete="off" v-if="showForm">
       <b-form-group id="nameLabel"
                     label="Name:"
                     label-for="name">
@@ -152,7 +152,6 @@ export default {
       }
     },
     reset(evt) {
-      evt.preventDefault();
       this.task.name = '';
       this.task.description = '';
       this.task.machineId = null;
