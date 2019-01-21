@@ -2,8 +2,8 @@
   <div>
     <page-title-bar title="Login" :showBack="true" />
     <div class="description">Come in and take care of your mass specs.</div>
-    <b-alert :show="loginMessage === null ? false : true">
-      {{ loginMessage }}
+    <b-alert :show="message === null ? false : true">
+      {{ message }}
     </b-alert>
     <b-form @submit.prevent="login" @reset.prevent="reset" v-if="showForm">
       <b-form-group id="emailLabel"
@@ -48,7 +48,7 @@ export default {
         password: '',
       },
       showForm: true,
-      loginMessage: null,
+      message: null,
     };
   },
   methods: {
@@ -63,15 +63,19 @@ export default {
         this.$router.push({
           name: this.$store.state.route.from.name,
         });
-      } catch (error) {
-        this.loginMessage = error.response.data.error;
+      } catch (err) {
+        if (err.response) {
+          this.message = err.response.data.error;
+        } else {
+          this.message = 'No connection to the server. Please contact an admin.';
+        }
       }
     },
     reset() {
       this.user.email = '';
       this.user.name = '';
       this.user.password = '';
-      this.loginMessage = null;
+      this.message = null;
       this.showForm = false;
       this.$nextTick(() => { this.showForm = true; });
     },

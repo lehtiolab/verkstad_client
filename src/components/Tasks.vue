@@ -100,7 +100,11 @@ export default {
           this.message = 'There are no tasks.';
         }
       } catch (err) {
-        this.message = err.response.data.error;
+        if (err.response) {
+          this.message = err.response.data.error;
+        } else {
+          this.message = 'No connection to the server. Please contact an admin.';
+        }
       }
     },
     deleteTaskRequest(item) {
@@ -113,7 +117,11 @@ export default {
         await TaskService.deleteTask(this.modalQuestion.id);
         await this.loadTasks();
       } catch (err) {
-        this.message = err.response.data.error;
+        if (err.response) {
+          this.message = err.response.data.error;
+        } else {
+          this.message = 'No connection to the server. Please contact an admin.';
+        }
       }
     },
     showEdit(item) {

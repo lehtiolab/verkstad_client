@@ -100,7 +100,11 @@ export default {
           this.message = 'There are no logs.';
         }
       } catch (err) {
-        this.message = err.response.data.error;
+        if (err.response) {
+          this.message = err.response.data.error;
+        } else {
+          this.message = 'No connection to the server. Please contact an admin.';
+        }
       }
     },
     showDetails(item) {
@@ -120,7 +124,11 @@ export default {
         await LogService.deleteLog(this.modalQuestion.id);
         await this.loadLogs();
       } catch (err) {
-        this.message = err.response.data.error;
+        if (err.response) {
+          this.message = err.response.data.error;
+        } else {
+          this.message = 'No connection to the server. Please contact an admin.';
+        }
       }
     },
   },

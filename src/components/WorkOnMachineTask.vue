@@ -78,7 +78,11 @@ export default {
           path: '/',
         });
       } catch (err) {
-        this.message = err.response.data.error;
+        if (err.response) {
+          this.message = err.response.data.error;
+        } else {
+          this.message = 'No connection to the server. Please contact an admin.';
+        }
       }
     },
     reset() {

@@ -37,7 +37,11 @@ export default {
         this.loadPlots();
       }
     } catch (err) {
-      this.message = err.response.data.error;
+      if (err.response) {
+        this.message = err.response.data.error;
+      } else {
+        this.message = 'No connection to the server. Please contact an admin.';
+      }
     }
   },
   methods: {
@@ -46,7 +50,11 @@ export default {
         this.plots = (await MachineQCService.getQCPlots(this.machine.kanteleId)).data;
         this.message = this.plots;
       } catch (err) {
-        this.message = err.response.data.error;
+        if (err.response) {
+          this.message = err.response.data.error;
+        } else {
+          this.message = 'No connection to the server. Please contact an admin.';
+        }
       }
     },
   },

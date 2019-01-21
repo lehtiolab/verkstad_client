@@ -106,7 +106,11 @@ export default {
           this.message = 'There are no machines.';
         }
       } catch (err) {
-        this.message = err.response.data.error;
+        if (err.response) {
+          this.message = err.response.data.error;
+        } else {
+          this.message = 'No connection to the server. Please contact an admin.';
+        }
       }
     },
     deleteMachineRequest(item) {
@@ -137,7 +141,11 @@ export default {
         await MachineService.deleteMachine(this.modalQuestion.id);
         await this.loadMachines();
       } catch (err) {
-        this.message = err.response.data.error;
+        if (err.response) {
+          this.message = err.response.data.error;
+        } else {
+          this.message = 'No connection to the server. Please contact an admin.';
+        }
       }
     },
     resetModal() {

@@ -2,8 +2,8 @@
   <div>
     <page-title-bar title="Sign up" :showBack="true" />
     <div class="description">Register a new user for this app by submitting the form below.</div>
-    <b-alert :show="signUpMessage === null ? false : true">
-      {{ signUpMessage }}
+    <b-alert :show="message === null ? false : true">
+      {{ message }}
     </b-alert>
     <b-form @submit.prevent="signUp" @reset.prevent="reset" autocomplete="off" v-if="showForm">
       <b-form-group id="emailLabel"
@@ -59,7 +59,7 @@ export default {
         password: '',
       },
       showForm: true,
-      signUpMessage: null,
+      message: null,
     };
   },
   methods: {
@@ -73,15 +73,19 @@ export default {
         this.$router.push({
           path: '/users',
         });
-      } catch (error) {
-        this.signUpMessage = error.response.data.error;
+      } catch (err) {
+        if (err.response) {
+          this.message = err.response.data.error;
+        } else {
+          this.message = 'No connection to the server. Please contact an admin.';
+        }
       }
     },
     reset() {
       this.user.email = '';
       this.user.name = '';
       this.user.password = '';
-      this.signUpMessage = null;
+      this.message = null;
       this.showForm = false;
       this.$nextTick(() => { this.showForm = true; });
     },

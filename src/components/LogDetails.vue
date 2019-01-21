@@ -75,7 +75,11 @@ export default {
     try {
       this.log = (await LogService.log(this.logId)).data;
     } catch (err) {
-      this.message = err.response.data.error;
+      if (err.response) {
+        this.message = err.response.data.error;
+      } else {
+        this.message = 'No connection to the server. Please contact an admin.';
+      }
     }
   },
 };
