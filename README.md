@@ -2,6 +2,9 @@
 
 _The mass spectrometry maintenance app_
 
+Make your mass spec maintenance team happy by providing them with a coffee, tablet and
+this app!
+
 ![Home page](https://raw.githubusercontent.com/mtstahl/client_mstodos/master/screenshots/screenshot_01.png)
 Tasks to be done.
 
