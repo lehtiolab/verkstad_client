@@ -23,7 +23,9 @@
       <!-- <a href="#" class="seemless" @click="fullScreen">Full screen</a> -->
     </div>
     <div class="navbar-footer">
-      <b-nav-text>Lehtiö Lab {{ year }}</b-nav-text>
+      <b-nav-text>
+        <router-link class="link-about" to="/about">Lehtiö Lab {{ year }}</router-link>
+      </b-nav-text>
     </div>
   </b-nav>
 </template>
@@ -134,5 +136,10 @@ export default {
   margin: 0 auto 0 auto;
   font-size: .8rem;
   text-align: center;
+}
+
+a.link-about {
+  color: #fff;
+  text-decoration: none;
 }
 </style>

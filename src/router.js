@@ -13,6 +13,7 @@ import AddEditTask from './components/AddEditTask.vue';
 import TaskDetails from './components/TaskDetails.vue';
 import WorkOnMachineTask from './components/WorkOnMachineTask.vue';
 import MachineQC from './components/MachineQC.vue';
+import About from './components/About.vue';
 
 Vue.use(Router);
 
@@ -91,6 +92,11 @@ export default new Router({
       name: 'machineqc',
       component: MachineQC,
       props: true,
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: About,
     },
     {
       path: '*',
