@@ -1,6 +1,7 @@
 {
-  "name": "client_mstodos",
+  "name": "verkstad_client",
   "version": "0.1.0",
+  "description": "Frontend for the Verkstad mass spec maintenance app.",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
