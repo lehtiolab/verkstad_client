@@ -30,7 +30,8 @@ Check a task.
 
 ## Can I use Verkstad, too?
 
-Yes, of course. Just clone this repo and run `npm run build`. The resulting
+Yes, of course. Just clone this repo, adjust the API address in `src/services/Api.js`
+and run `npm run build`. The resulting
 `dist` folder is ready to be served by your machines. Also clone the
 [server repo](https://github.com/mtstahl/verkstad_server) and adjust
 URLs and ports. Also you can directly pull and run the docker image
