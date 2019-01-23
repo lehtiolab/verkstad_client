@@ -35,4 +35,4 @@ Yes, of course. Just clone this repo and run `npm run build`. The resulting
 [server repo](https://github.com/mtstahl/verkstad_server) and adjust
 URLs and ports. Also you can directly pull and run the docker image
 `matthiasstahl/verkstad_server`. Please refer to the descriptions
-[here](https://github.com/mtstahl/verkstad_server)
+[here](https://github.com/mtstahl/verkstad_server).
