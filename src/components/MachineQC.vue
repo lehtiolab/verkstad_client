@@ -31,9 +31,9 @@
 <script>
 import PageTitleBar from './PageTitleBar.vue';
 import MachineService from '../services/MachineService';
-// import MachineQCService from '../services/MachineQCService';
+import MachineQCService from '../services/MachineQCService';
 
-import plot from '../../data/plot.json';
+// import plot from '../../data/plot.json';
 
 export default {
   name: 'MachineQC',
@@ -70,8 +70,8 @@ export default {
   methods: {
     async loadPlots() {
       try {
-        // this.plots = (await MachineQCService.getQCPlots(this.machine.kanteleId));
-        this.plots = plot;
+        this.plots = (await MachineQCService.getQCPlots(this.machine.kanteleId)); // .data?
+        // this.plots = plot;
         // eslint-disable-next-line no-eval
         eval(this.plots.bokeh_code.script);
         this.plotsLoaded = true;
