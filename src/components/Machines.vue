@@ -18,9 +18,9 @@
           Edit
         </b-button>
         <b-button size="sm"
-                  class="mr-2 btn-showqc"
+                  class="mr-2 btn-details"
                   @click.stop="showQC(row.item)"
-                  v-if="false">
+                  v-show="$store.state.token">
           Show QC
         </b-button>
         <b-button size="sm"
