@@ -10,10 +10,10 @@
       <div class="task-latest">
         Latest: {{ data.nextDate.split('T')[0] }}
         ({{ (data.dayDiff &lt; -1)
-        ? 'in ' + formatDay(data.dayDiff)
-        : ((data.dayDiff &lt; 0)
-        ? 'today'
-        : formatDay(data.dayDiff) + ' ago') }})
+           ? 'in ' + formatDay(data.dayDiff)
+           : ((data.dayDiff &lt; 0)
+           ? 'today'
+           : formatDay(data.dayDiff) + ' ago') }})
       </div>
     </div>
     <b-button class="check-task"
