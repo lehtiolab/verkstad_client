@@ -18,16 +18,16 @@
           Edit
         </b-button>
         <b-button size="sm"
-                  class="mr-2 btn-details"
-                  @click.stop="showQC(row.item)"
-                  v-show="$store.state.token">
-          Show QC
-        </b-button>
-        <b-button size="sm"
                   class="mr-2 btn-delete"
                   v-show="$store.state.token"
                   @click.stop="deleteMachineRequest(row.item)">
           Delete
+        </b-button>
+        <b-button size="sm"
+                  class="mr-2 btn-details"
+                  @click.stop="showQC(row.item)"
+                  v-show="$store.state.token && row.item.kanteleId">
+          Show QC
         </b-button>
       </template>
     </b-table>

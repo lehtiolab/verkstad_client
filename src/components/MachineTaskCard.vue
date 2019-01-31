@@ -9,9 +9,11 @@
       <div class="task-machine">{{ data.machineTask.Machine.name }}</div>
       <div class="task-latest">
         Latest: {{ data.nextDate.split('T')[0] }}
-        ({{ (Math.abs(data.dayDiff) &lt; 1)
-           ? 'less than one day '
-           : Math.ceil(Math.abs(data.dayDiff)) + ' days ' }} left)
+        ({{ (data.dayDiff &lt; -1)
+           ? 'in ' + formatDay(data.dayDiff)
+           : ((data.dayDiff &lt; 0)
+           ? 'today'
+           : formatDay(data.dayDiff) + ' ago') }})
       </div>
     </div>
     <b-button class="check-task"
@@ -63,6 +65,13 @@ export default {
           taskId: this.data.machineTask.Task.id,
         },
       });
+    },
+    formatDay(days) {
+      const rounded = Math.abs(Math.ceil(days));
+      if (rounded > 1) {
+        return `${rounded} days`;
+      }
+      return `${rounded} day`;
     },
   },
 };
