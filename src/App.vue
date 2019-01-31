@@ -27,17 +27,23 @@ html, body {
   font-size: 15px;
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow-y: scroll;
+@media(max-width: 1200px) {
+  html, body {
+    font-size: 11px;
+  }
 }
 
 @media(max-width: 980px) {
   html, body {
     font-size: 10px;
   }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: scroll;
 }
 
 form {
