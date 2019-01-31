@@ -53,7 +53,7 @@ form {
 }
 
 button.btn-outlined, a.btn-outlined {
-  margin-right: 5px;
+  margin: 0 0 5px 5px;
   background-color: #9dd5f8;
   border: none;
 }

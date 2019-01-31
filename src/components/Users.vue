@@ -11,7 +11,10 @@
              responsive
              v-if="users.length > 0">
       <template slot="actions" slot-scope="row">
-        <b-button size="sm" class="mr-2 btn-delete" @click.stop="deleteUserRequest(row.item)">
+        <b-button size="sm"
+                  class="mr-2 btn-delete"
+                  @click.stop="deleteUserRequest(row.item)"
+                  v-show="$store.state.token">
           Delete
         </b-button>
       </template>

@@ -13,7 +13,8 @@
       <template slot="actions" slot-scope="row">
         <b-button size="sm"
                   class="mr-2 btn-details"
-                  @click.stop="showEdit(row.item)">
+                  @click.stop="showEdit(row.item)"
+                  v-show="$store.state.token">
           Edit
         </b-button>
         <b-button size="sm"
