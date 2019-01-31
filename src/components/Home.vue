@@ -100,8 +100,8 @@ export default {
   computed: {
     orderedDueMachineTasks() {
       return {
-        today: _.orderBy(this.dueMachineTasks.today, 'dayDiff', 'desc'),
-        upcoming: _.orderBy(this.dueMachineTasks.upcoming, 'dayDiff', 'desc'),
+        today: _.orderBy(this.dueMachineTasks.today, ['dayDiff', 'id'], 'desc'),
+        upcoming: _.orderBy(this.dueMachineTasks.upcoming, ['dayDiff', 'id'], 'desc'),
       };
     },
   },
