@@ -34,6 +34,7 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
+  min-height: 7rem;
   margin: 0;
   padding: 1.6rem 0 0 0;
   font-family: 'Work Sans', sans-serif;
