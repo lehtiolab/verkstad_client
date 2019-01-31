@@ -7,22 +7,22 @@
     </b-alert>
     <div class="description" v-if="!plotsLoaded && !message">Plots loading...</div>
     <div class="plots" v-if="plotsLoaded">
-      <h5>Number of identifications</h5>
+      <h3>Number of identifications</h3>
       <div :id="plots.bokeh_code.div.amount_peptides.elementid"></div>
       <hr />
-      <h5>Number of PSMs</h5>
+      <h3>Number of PSMs</h3>
       <div :id="plots.bokeh_code.div.amount_psms.elementid"></div>
       <hr />
-      <h5>Peptide precursor areas</h5>
+      <h3>Peptide precursor areas</h3>
       <div :id="plots.bokeh_code.div.precursorarea.elementid"></div>
       <hr />
-      <h5>PSM MSGFScore</h5>
+      <h3>PSM MSGFScore</h3>
       <div :id="plots.bokeh_code.div.msgfscore.elementid"></div>
       <hr />
-      <h5>Precursor error (ppm)</h5>
+      <h3>Precursor error (ppm)</h3>
       <div :id="plots.bokeh_code.div.prec_error.elementid"></div>
       <hr />
-      <h5>Retention time (min)</h5>
+      <h3>Retention time (min)</h3>
       <div :id="plots.bokeh_code.div.rt.elementid"></div>
     </div>
   </div>
@@ -100,8 +100,8 @@ export default {
   overflow-y: scroll;
 }
 
-h5 {
-  font-size: 1.1rem;
+h3 {
+  font-size: 1.5rem;
   font-weight: normal;
 }
 </style>
