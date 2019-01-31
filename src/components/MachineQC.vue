@@ -5,7 +5,7 @@
     <b-alert :show="message === null ? false : true">
       {{ message }}
     </b-alert>
-    <div class="description" v-if="!plotsLoaded & !message">Plots loading...</div>
+    <div class="description" v-if="!plotsLoaded && !message">Plots loading...</div>
     <div class="plots" v-if="plotsLoaded">
       <h5>Number of identifications</h5>
       <div :id="plots.bokeh_code.div.amount_peptides.elementid"></div>
