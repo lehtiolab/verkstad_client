@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <page-title-bar title="Login" :showBack="true" />
     <div class="description">Come in and take care of your mass specs.</div>
     <b-alert :show="message === null ? false : true">
@@ -84,7 +84,4 @@ export default {
 </script>
 
 <style scoped>
-form {
-  max-width: 400px;
-}
 </style>

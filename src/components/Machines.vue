@@ -1,5 +1,5 @@
 <template>
-  <div class="machines-wrapper">
+  <div class="wrapper">
     <page-title-bar title="Machines" />
     <div class="description"></div>
     <b-alert :show="message === null ? false : true">
@@ -18,9 +18,9 @@
           Edit
         </b-button>
         <b-button size="sm"
-                  class="mr-2 btn-showqc"
+                  class="mr-2 btn-details"
                   @click.stop="showQC(row.item)"
-                  v-if="false">
+                  v-show="$store.state.token">
           Show QC
         </b-button>
         <b-button size="sm"
@@ -159,9 +159,4 @@ export default {
 </script>
 
 <style scoped>
-machines-wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Sidebar />
-    <b-container fluid class="wrapper">
+    <b-container fluid>
       <router-view></router-view>
     </b-container>
   </div>
@@ -24,10 +24,36 @@ export default {
 
 html, body {
   height: 100%;
+  font-size: 15px;
+}
+
+@media(max-width: 1200px) {
+  html, body {
+    font-size: 11px;
+  }
+}
+
+@media(max-width: 980px) {
+  html, body {
+    font-size: 10px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+form {
+  max-width: 40%;
+  overflow-y: scroll;
+  padding-bottom: 10px;
 }
 
 button.btn-outlined, a.btn-outlined {
-  margin: 5px 10px 5px 0;
+  margin-right: 5px;
   background-color: #9dd5f8;
   border: none;
 }
@@ -44,7 +70,7 @@ button.btn-delete {
 
 .description {
   min-height: 5px;
-  margin: 13px 0 13px 0;
+  margin: 2% 0 2% 0;
 }
 
 .alert-info {
@@ -55,6 +81,6 @@ button.btn-delete {
 #app {
   display: flex;
   width: 100%;
-  height: 100vh;
+  height: 100%;
 }
 </style>

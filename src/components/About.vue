@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <page-title-bar title="About this app" />
     <div class="description">Verkstad – The mass spec maintenance app.</div>
     <br />

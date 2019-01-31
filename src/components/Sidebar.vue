@@ -1,5 +1,5 @@
 <template>
-  <b-nav class="sidebar" type="dark">
+  <b-nav class="sidebar">
     <div class="navbar-header">
       <b-navbar-brand class="logo-wrapper" to="/">
         <font-awesome-icon icon="oil-can"/>
@@ -20,7 +20,7 @@
       </b-nav-text>
       <b-nav-item to="/login" v-if="!$store.state.user">Login</b-nav-item>
       <b-nav-item @click="logout" v-if="$store.state.user">Logout</b-nav-item>
-      <!-- <a href="#" class="seemless" @click="fullScreen">Full screen</a> -->
+      <a href="#" class="seemless" @click="fullScreen">Full screen</a>
     </div>
     <div class="navbar-footer">
       <b-nav-text>
@@ -41,9 +41,9 @@ export default {
     logout() {
       this.$store.dispatch('logout');
     },
-    // fullScreen() {
-    //   document.documentElement.webkitRequestFullScreen();
-    // },
+    fullScreen() {
+      document.documentElement.webkitRequestFullScreen();
+    },
   },
 };
 </script>
@@ -52,8 +52,8 @@ export default {
 .sidebar {
   display: flex;
   align-items: flex-start;
-  min-width: 250px;
-  max-width: 250px;
+  width: 30%;
+  max-width: 300px;
   font-family: "Work Sans", sans-serif;
   font-weight: 200;
   background: #9dd5f8;
@@ -62,7 +62,7 @@ export default {
 
 .navbar-header {
   width: 90%;
-  margin: 36px auto 0 auto;
+  margin: 1.6rem auto 0 auto;
   text-align: center;
 }
 
@@ -71,22 +71,22 @@ export default {
 }
 
 .logo-wrapper {
-  width: 140px;
-  height: 140px;
+  width: 11rem;
+  height: 11rem;
   margin-left: 12px;
-  font-size: 5rem;
-  border: 5px solid #fffcf9;
+  font-size: 6.5rem;
+  border: 0.3rem solid #fffcf9;
   border-radius: 50%;
 }
 
 .title {
-  margin-top: 10px;
-  font-size: 2rem;
+  margin-top: 5%;
+  font-size: 2.5rem;
 }
 
 .subtitle {
-  margin-top: 10px;
-  font-size: 1.2rem;
+  margin-top: 5%;
+  font-size: 1.1rem;
 }
 
 .navbar-body {
@@ -111,7 +111,7 @@ export default {
 
 .navbar-user .user-name {
   width: 100%;
-  background-color: #25899f;
+  background-color: #4c8fdb;
 }
 
 .navbar-user a {
@@ -131,10 +131,8 @@ export default {
 
 .navbar-footer {
   align-self: flex-end;
-  width: 90%;
-  height: 50px;
-  margin: 0 auto 0 auto;
-  font-size: .8rem;
+  width: 100%;
+  font-size: 0.8rem;
   text-align: center;
 }
 

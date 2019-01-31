@@ -1,5 +1,5 @@
 <template>
-  <div class="logbook-wrapper">
+  <div class="wrapper">
     <page-title-bar title="Logbook" />
     <div class="description"></div>
     <b-alert :show="message === null ? false : true">
@@ -139,9 +139,4 @@ export default {
 </script>
 
 <style scoped>
-.logbook-wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
 </style>
