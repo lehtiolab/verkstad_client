@@ -1,5 +1,5 @@
 <template>
-  <div v-if="machineTask">
+  <div class="wrapper" v-if="machineTask">
     <page-title-bar :title="machineTask.Task.name" :showBack="true" />
     <div class="description green-desc" v-if="mode === 'check'">
       <font-awesome-icon icon="check-circle" />
@@ -103,12 +103,7 @@ table {
 }
 
 .row-title {
-  min-width: 100px;
   vertical-align: top;
-}
-
-form {
-  max-width: 500px;
 }
 
 .description {

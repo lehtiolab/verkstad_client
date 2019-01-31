@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="wrapper">
     <page-title-bar title="Add machine" :showBack="true" v-if="machineId === 'add'" />
-    <page-title-bar :title="machine.name" :showBack="true" v-if="machineId !== 'add'"/>
+    <page-title-bar :title="machine.name" :showBack="true" v-if="machineId !== 'add'" />
     <div class="description" v-if="machineId === 'add'">Register a new mass spectrometer.</div>
     <div class="description" v-else>Edit the mass spectrometer.</div>
     <b-alert :show="message === null ? false : true">
@@ -107,7 +107,4 @@ export default {
 </script>
 
 <style scoped>
-form {
-  max-width: 400px;
-}
 </style>

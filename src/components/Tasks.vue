@@ -1,5 +1,5 @@
 <template>
-  <div class="tasks-wrapper">
+  <div class="wrapper">
     <page-title-bar title="Tasks" />
     <div class="description"></div>
     <b-alert :show="message === null ? false : true">
@@ -140,9 +140,4 @@ export default {
 </script>
 
 <style scoped>
-tasks-wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
 </style>

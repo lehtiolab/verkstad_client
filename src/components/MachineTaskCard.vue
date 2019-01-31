@@ -74,14 +74,15 @@ li.task-card {
   flex-direction: row;
   align-items: center;
   width: 100%;
-  height: 80px;
-  margin: 0 10px 10px 0;
+  height: 5.5rem;
+  margin: 0 2% 2% 0;
 }
 
 .task-color-bar {
-  width: 35px;
+  width: 10%;
+  max-width: 30px;
   height: 100%;
-  border-radius: 7px 0 0 7px;
+  border-radius: 5px 0 0 5px;
 }
 
 .bar-red {
@@ -102,7 +103,7 @@ li.task-card {
   align-items: left;
   width: 100%;
   height: 100%;
-  padding: 5px 10px;
+  padding: 0.6rem;
   background-color: rgb(233, 233, 233);
 }
 
@@ -114,7 +115,8 @@ li.task-card {
 }
 
 button {
-  width: 60px;
+  width: 17%;
+  max-width: 60px;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -123,7 +125,7 @@ button {
 }
 
 button.dismiss-task {
-  border-radius: 0 7px 7px 0;
+  border-radius: 0 5px 5px 0;
   background-color: lightcoral;
 }
 

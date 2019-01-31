@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <page-title-bar title="Add task" :showBack="true" v-if="taskId === 'add'"/>
-    <page-title-bar :title="task.name" :showBack="true" v-if="taskId !== 'add'"/>
+  <div class="wrapper">
+    <page-title-bar title="Add task" :showBack="true" v-if="taskId === 'add'" />
+    <page-title-bar :title="task.name" :showBack="true" v-if="taskId !== 'add'" />
     <div class="description" v-if="taskId === 'add'">Create a new maintenance task.</div>
-    <div class="description" v-if="taskId !== 'add'">Edit a maintenance task.</div>
+    <div class="description" v-else>Edit a maintenance task.</div>
     <b-alert :show="message === null ? false : true">
       {{ message }}
     </b-alert>
@@ -172,7 +172,4 @@ export default {
 </script>
 
 <style scoped>
-form {
-  max-width: 600px;
-}
 </style>

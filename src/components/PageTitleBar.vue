@@ -29,18 +29,15 @@ export default {
 </script>
 
 <style scoped>
-
 .bar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
-  min-height: 120px;
-  max-height: 120px;
   margin: 0;
-  padding: 20px 0 20px 0;
+  padding: 1.6rem 0 0 0;
   font-family: 'Work Sans', sans-serif;
-  border-bottom: 3px solid #9dd5f8;
+  border-bottom: 0.1rem solid #9dd5f8;
 }
 
 .bar h1 {
@@ -49,7 +46,8 @@ export default {
 }
 
 a.btn-back, a.btn-back.btn-secondary.active {
-  font-size: 3rem;
+  margin: auto 0;
+  font-size: 2.5rem;
   color: #9dd5f8;
   background-color: #fff;
   border: none;

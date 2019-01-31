@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <page-title-bar title="Sign up" :showBack="true" />
     <div class="description">Register a new user for this app by submitting the form below.</div>
     <b-alert :show="message === null ? false : true">
@@ -95,7 +95,4 @@ export default {
 </script>
 
 <style scoped>
-form {
-  max-width: 400px;
-}
 </style>

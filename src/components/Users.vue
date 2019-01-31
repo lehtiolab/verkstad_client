@@ -1,5 +1,5 @@
 <template>
-  <div class="users-wrapper">
+  <div class="wrapper">
     <page-title-bar title="Users" />
     <div class="description"></div>
     <b-alert :show="message === null ? false : true">
@@ -132,9 +132,4 @@ export default {
 </script>
 
 <style scoped>
-users-wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
 </style>

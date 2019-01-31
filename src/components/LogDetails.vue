@@ -1,5 +1,5 @@
 <template>
-  <div class="log-details">
+  <div class="wrapper">
     <page-title-bar :title="log.task" :showBack="true" v-if="log" />
     <page-title-bar title="Error" showBack="true" v-if="!log" />
     <div class="description"></div>
@@ -99,6 +99,6 @@ table {
 }
 
 .spacer {
-  height: 20px;
+  height: 2rem;
 }
 </style>
