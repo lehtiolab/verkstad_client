@@ -71,8 +71,6 @@ export default {
     async loadPlots() {
       try {
         this.plots = (await MachineQCService.getQCPlots(this.machine.kanteleId)).data;
-        console.log(this.plots);
-        // this.plots = plot;
         // eslint-disable-next-line no-eval
         eval(this.plots.bokeh_code.script);
         this.plotsLoaded = true;
