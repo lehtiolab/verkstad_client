@@ -6,24 +6,24 @@
       {{ message }}
     </b-alert>
     <div class="description" v-if="!plotsLoaded && !message">Plots loading...</div>
-    <div class="plots" v-if="plotsLoaded">
+    <div class="plots bk-root" v-if="plotsLoaded">
       <h3>Number of identifications</h3>
-      <div :id="plots.bokeh_code.div.amount_peptides.elementid"></div>
+      <div class="bk-plotdiv" :id="plots.bokeh_code.div.amount_peptides.elementid"></div>
       <hr />
       <h3>Number of PSMs</h3>
-      <div :id="plots.bokeh_code.div.amount_psms.elementid"></div>
+      <div class="bk-plotdiv" :id="plots.bokeh_code.div.amount_psms.elementid"></div>
       <hr />
       <h3>Peptide precursor areas</h3>
-      <div :id="plots.bokeh_code.div.precursorarea.elementid"></div>
+      <div class="bk-plotdiv" :id="plots.bokeh_code.div.precursorarea.elementid"></div>
       <hr />
       <h3>PSM MSGFScore</h3>
-      <div :id="plots.bokeh_code.div.msgfscore.elementid"></div>
+      <div class="bk-plotdiv" :id="plots.bokeh_code.div.msgfscore.elementid"></div>
       <hr />
       <h3>Precursor error (ppm)</h3>
-      <div :id="plots.bokeh_code.div.prec_error.elementid"></div>
+      <div class="bk-plotdiv" :id="plots.bokeh_code.div.prec_error.elementid"></div>
       <hr />
       <h3>Retention time (min)</h3>
-      <div :id="plots.bokeh_code.div.rt.elementid"></div>
+      <div class="bk-plotdiv" :id="plots.bokeh_code.div.rt.elementid"></div>
     </div>
   </div>
 </template>

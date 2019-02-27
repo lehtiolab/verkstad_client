@@ -1,8 +1,8 @@
 <template>
   <b-nav class="sidebar">
     <div class="navbar-header">
-      <b-navbar-brand class="logo-wrapper" to="/">
-        <font-awesome-icon icon="oil-can"/>
+      <b-navbar-brand id="fullScreenBtn" class="logo-wrapper" @click="fullScreen">
+        <font-awesome-icon icon="oil-can" />
       </b-navbar-brand>
       <h5 class="title">Verkstad</h5>
       <h6 class="subtitle">Mass Spectrometer Maintenance</h6>
@@ -20,7 +20,6 @@
       </b-nav-text>
       <b-nav-item to="/login" v-if="!$store.state.user">Login</b-nav-item>
       <b-nav-item @click="logout" v-if="$store.state.user">Logout</b-nav-item>
-      <a href="#" class="seemless" @click="fullScreen">Full screen</a>
     </div>
     <div class="navbar-footer">
       <b-nav-text>
@@ -36,6 +35,9 @@ export default {
     return {
       year: new Date().getFullYear(),
     };
+  },
+  mounted() {
+    document.getElementById('fullScreenBtn').click();
   },
   methods: {
     logout() {
@@ -120,13 +122,6 @@ export default {
 
 .navbar-user a.active {
   background-color: #25899f;
-}
-
-.navbar-user .seemless {
-  color: #9dd5f8;
-  background-color: #9dd5f8;
-  border: none;
-  outline: none;
 }
 
 .navbar-footer {
