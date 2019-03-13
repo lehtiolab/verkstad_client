@@ -36,18 +36,23 @@
 </template>
 
 <script>
+import LogService from '../services/LogService';
+
 export default {
   name: 'Login',
   props: ['data'],
   methods: {
-    checkTask() {
-      this.$router.push({
-        name: 'workonmachinetask',
-        params: {
-          mode: 'check',
+    async checkTask() {
+      try {
+        await LogService.add({
+          status: 'check',
           machineTaskId: this.data.machineTask.id,
-        },
-      });
+          comment: '',
+        });
+        this.$emit('machineTaskChecked');
+      } catch (err) {
+        console.log(err);
+      }
     },
     dismissTask() {
       this.$router.push({
