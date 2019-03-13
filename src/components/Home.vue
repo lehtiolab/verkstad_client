@@ -12,7 +12,8 @@
           <machine-task-card v-for="dueMachineTask in orderedDueMachineTasks.today"
                              :key="dueMachineTask.id"
                              class="task-card"
-                             :data="dueMachineTask">
+                             :data="dueMachineTask"
+                             v-on:machineTaskChecked="loadMachineTasks">
           </machine-task-card>
           <li v-if="orderedDueMachineTasks.today.length === 0">
             <b-alert :show="true">
@@ -30,7 +31,8 @@
           <machine-task-card v-for="dueMachineTask in orderedDueMachineTasks.upcoming"
                              :key="dueMachineTask.id"
                              class="task-card"
-                             :data="dueMachineTask">
+                             :data="dueMachineTask"
+                             v-on:machineTaskChecked="loadMachineTasks">
           </machine-task-card>
         </ol>
       </div>
