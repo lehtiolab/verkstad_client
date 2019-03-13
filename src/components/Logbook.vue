@@ -56,8 +56,8 @@ export default {
       logs: [],
       fields: {
         status: {
-          label: '',
-          sortable: false,
+          label: 'Status',
+          sortable: true,
         },
         task: {
           label: 'Task',
