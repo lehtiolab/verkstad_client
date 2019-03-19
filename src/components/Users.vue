@@ -97,7 +97,7 @@ export default {
           this.message = null;
         }
       } catch (err) {
-        if (err.response) {
+        if (err.response && err.response.data.error !== '') {
           this.message = err.response.data.error;
         } else {
           this.message = 'No connection to the server. Please contact an admin.';
@@ -120,7 +120,7 @@ export default {
         this.loadUsers();
         this.message = null;
       } catch (err) {
-        if (err.response) {
+        if (err.response && err.response.data.error !== '') {
           this.message = err.response.data.error;
         } else {
           this.message = 'No connection to the server. Please contact an admin.';
