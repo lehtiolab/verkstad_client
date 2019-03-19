@@ -51,7 +51,7 @@ export default {
         });
         this.$emit('machineTaskChecked');
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     },
     dismissTask() {
