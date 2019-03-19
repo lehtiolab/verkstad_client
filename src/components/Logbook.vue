@@ -72,7 +72,7 @@ export default {
           sortable: true,
           formatter: (value) => {
             const d = new Date(value);
-            return d.toISOString().split('T')[0];
+            return d.toISOString().split('.')[0].replace('T', ' ');
           },
         },
         user: {
