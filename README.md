@@ -10,7 +10,7 @@ Tasks to be done.
 
 ## What does this piece of software do?
 
-This is vue.js-based todo app, which serves and is intended to organize tasks for the maintenance of
+This is a vue.js-based todo app, which serves and is intended to organize tasks for the maintenance of
 [modern proteomics mass spectrometers](https://en.wikipedia.org/wiki/Mass_spectrometry).
 
 Each day one has to check the injection needles, run quality control
